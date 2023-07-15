@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:frament="head">
+<meta charset="UTF-8">
+<title>SDH BD SPI-Detl</title>
+
+<!-- Bootstarp Básico -->
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+<!-- CSS Básico Estilos-->
+<link rel="stylesheet" th:href="@{/css/template.css}"> 
+</head>
+<body>
+	<!--  BARRA DE NAVEGACION-->
+	<header th:fragment="header">
+
+		<nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-top shadow-lg" >
+			<div class="container-fluid">
+				<a class="navbar-brand" href=""><strong><img class="imagenlogo" th:src="@{/images/sdh.png}" /></strong> </a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent" aria-label="breadcrumb">
+					<ul class="navbar-nav ml-auto " >
+						<li class="nav-item breadcrumb-item" sec:authorize="!isAuthenticated()" aria-label="breadcrumb">
+							<a class="btn btn-outline-primary shadow"  th:href="@{/login}">Iniciar sesión</a>
+						</li>
+						<li class="nav-item breadcrumb-item" sec:authorize="isAuthenticated()">
+						  <div class="btn-group shadow">
+							  <button type="button" class="btn btn-outline-primary">
+								  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+									  <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+								  </svg>
+							  </button>
+							  <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    <span class="sr-only">Toggle Dropdown</span>
+							  </button>
+							  <div class="dropdown-menu dropdown-menu-right bg-info border-0">
+							  	<a class="dropdown-item text-white-50" sec:authentication="name"></a >
+							    <div class="dropdown-divider "></div>
+							    <form th:action="@{/logout}" method="post">
+							    	<button class="dropdown-item text-white-50" type="submit">Cerrar sesión</button >
+							    </form >
+							  </div>
+						 </div>
+						</li>	
+					</ul>	
+				</div>	
+			</div>
+		</nav>
+		<!-- MENSAJES DE ALERTA -->
+		<div class="container-fluid">
+			<div class="alert alert-success alert-dismissible fade show text-success fixed-top" role="alert" th:if="${success !=null}">
+				<label th:text="${success}"></label>
+			</div>
+			<div class="alert alert-danger alert-dismissible fade show text-danger fixed-top" role="alert"th:if="${error !=null}">
+				<label th:text="${error}"></label>
+			</div>
+			<div class="alert alert-warning alert-dismissible fade show text-warning fixed-top" role="alert"th:if="${warning !=null}">
+				<label th:text="${warning}"></label>
+			</div>
+			<div class="alert alert-info alert-dismissible fade show text-info fixed-top" role="alert"th:if="${info !=null}">
+				<label th:text="${info}"></label>
+			</div>
+		</div>
+	</header>
+	<!-- CONTENIDO -->
+	<div class="container"></div>
+	<!-- PIE DE PAGINA -->
+	<footer th:fragment="footer" class="footer bg-info text-center text-dark">
+
+		<div class="container">
+			<p>Base-DatosSPI &copy; -SDH-<label id="footertext"></label></p >
+		</div>
+		<!-- Jquery Básico -->
+		<script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/Obtenervalores.js}" src="../static/js/Obtenervalores.js"></script>
+		<script type="text/javascript" th:src="@{/js/generales.js}" src="../static/js/generales.js"></script>
+
+	</footer>
+
+</body>
+</html>

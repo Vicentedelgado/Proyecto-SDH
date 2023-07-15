@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:frament="head">
+<meta charset="UTF-8">
+<title>SDH BD SPI</title>
+
+<!-- Bootstarp Básico -->
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+<!-- CSS Básico Estilos-->
+<link rel="stylesheet" th:href="@{/css/home.css}">
+<link rel="stylesheet" th:href="@{/css/signin.css}">
+</head>
+<body>
+	<!--  BARRA DE NAVEGACION-->
+	<header th:fragment="header">
+
+		<nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-top shadow-lg" >
+			<div class="container-fluid">
+				<a class="navbar-brand" th:href="@{/}"><img class="imagenlogo" th:src="@{/images/sdh.png}" /></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent" aria-label="breadcrumb">
+				
+					<ul class="navbar-nav ml-auto " >
+						<!-- <li class="nav-item active breadcrumb-item" aria-label="breadcrumb">
+						<a class="nav-link" th:href="@{/home}">INICIO<span class="sr-only">(current)</span>
+						</a></li> -->
+						<!-- <li class="nav-item breadcrumb-item" aria-label="breadcrumb"><a class="nav-link" th:href="@{/views/Formulario/}">FORMULARIO</a></li> -->
+					</ul>
+					<ul class="navbar-nav ml-auto " >
+						<li class="nav-item breadcrumb-item" sec:authorize="!isAuthenticated()" aria-label="breadcrumb">
+							<a class="btn btn-outline-primary shadow"  th:href="@{/login}">Iniciar sesión</a>
+						</li>
+						<li class="nav-item breadcrumb-item" sec:authorize="isAuthenticated()">
+						  <div class="btn-group shadow">
+							  <button type="button" class="btn btn-outline-primary">
+								  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+									  <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+								  </svg>
+							  </button>
+							  <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    <span class="sr-only">Toggle Dropdown</span>
+							  </button>
+							  <div class="dropdown-menu dropdown-menu-right bg-info border-0">
+							  	<a class="dropdown-item text-white-50" sec:authentication="name"></a >
+							    <div class="dropdown-divider "></div>
+							    <form th:action="@{/logout}" method="post">
+							    	<button class="dropdown-item text-white-50" type="submit">Cerrar sesión</button >
+							    </form >
+							  </div>
+						 </div>
+						</li>	
+					</ul>	
+				</div>	
+			</div>
+		</nav>
+		<!-- SIDEBAR -->
+		<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-info sidebar collapse border-0" sec:authorize="isAuthenticated()">
+	      <div class="sidebar-sticky pt-3 border-0">
+	        <ul class="nav flex-column">
+	          <li sec:authorize="isAuthenticated()" class="nav-item" aria-label="breadcrumb">
+	             <a class="nav-link text-white-50" th:href="@{/views/DataSpi/Formulario/}">
+	          	   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">
+				     <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+				     <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+				   </svg><p class="nav-item">INVENTARIO</p >
+				 </a>
+			  </li>
+			  <li sec:authorize="isAuthenticated()" class="nav-item" aria-label="breadcrumb">
+			  	<a class="nav-link text-white-50" th:href="@{/views/DataSpi/SpiDatos/}">
+			  		 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-task" viewBox="0 0 16 16">
+					   <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"/>
+					   <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z"/>
+					   <path fill-rule="evenodd" d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"/>
+					 </svg>
+			  	 	<p>DATOS DE LOS SPI</p>
+			  	</a>
+			  </li>
+			  <li sec:authorize="isAuthenticated()" class="nav-item" aria-label="breadcrumb">
+			  	<a class="nav-link text-white-50" th:href="@{/views/DataSpi/RegistroDelSpi/}">
+			  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
+				  <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+				</svg>
+			  	<p>REGISTRO DE BIENES/SERVICIOS SPI</p>
+			  	</a>
+			  </li>
+			  <li sec:authorize="isAuthenticated()" class="nav-item" aria-label="breadcrumb">
+				  <a class="nav-link text-white-50" th:href="@{/views/DataSpi/RRHH/}">
+				  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-vcard" viewBox="0 0 16 16">
+					  <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5ZM9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8Zm1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Z"/>
+					  <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2ZM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96c.026-.163.04-.33.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1.006 1.006 0 0 1 1 12V4Z"/>
+					</svg>
+				  	<p>RECURSO HUMANO DE LOS SPI</p>
+				  </a>
+			  </li>
+	        </ul>
+	        <ul class="nav flex-column" sec:authorize="hasRole('ROLE_ADMIN')" >
+				<li class="nav-item" aria-label="breadcrumb">
+				  <a class="nav-link text-white-50" type="button"data-toggle="collapse" data-target="#botonadministrador" aria-expanded="false" aria-controls="collapseExample">
+					    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-stars" viewBox="0 0 16 16">
+						  <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5z"/>
+						  <path d="M2.242 2.194a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.256-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53zm0 4a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.255-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53zm0 4a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.255-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53z"/>
+						</svg>
+					    <p>RECURSOS DE LOS SPI</p>
+				  </a>
+				  <div class="collapse" id="botonadministrador">
+					  <div class="card card-body bg-info border-0">
+					    <a class="dropdown-item text-white-50" th:href="@{/views/DataSpi/Admin/usuarios}">Registro de Usuario</a>
+					    <!--<a class="dropdown-item text-white-50" th:href="@{/views/DataSpi/Admin/zonas}">Zonas</a>-->
+					    <a class="dropdown-item text-white-50" th:href="@{/views/DataSpi/Admin/instituciones}">Institución</a>
+					    <a class="dropdown-item text-white-50" th:href="@{/views/DataSpi/Admin/activos}">Activos</a>
+					    <!--<a class="dropdown-item text-white-50" th:href="@{/views/DataSpi/Admin/tipos}">Categorías</a>-->
+					    <a class="dropdown-item text-white-50" th:href="@{/views/DataSpi/Admin/unidades}">Unidades</a>
+					    <!--<a class="dropdown-item text-white-50" th:href="@{/views/DataSpi/Admin/modalidades}">Modalidades</a>-->
+					  </div>
+				  </div>
+				</li>
+			</ul>
+	      </div>
+	    </nav>
+		<!-- SIDEBAR END-->
+		<!-- MENSAJES DE ALERTA -->
+		<div class="container-fluid">
+			<div class="alert alert-success alert-dismissible fade show text-success fixed-top" role="alert" th:if="${success !=null}">
+				<label th:text="${success}"></label>
+			</div>
+			<div class="alert alert-danger alert-dismissible fade show text-danger fixed-top" role="alert"th:if="${error !=null}">
+				<label th:text="${error}"></label>
+			</div>
+			<div class="alert alert-warning alert-dismissible fade show text-warning fixed-top" role="alert"th:if="${warning !=null}">
+				<label th:text="${warning}"></label>
+			</div>
+			<div class="alert alert-info alert-dismissible fade show text-info fixed-top" role="alert"th:if="${info !=null}">
+				<label th:text="${info}"></label>
+			</div>
+		</div>
+	</header>
+	<!-- CONTENIDO -->
+	<div class="container-fluid"></div>
+	<!-- PIE DE PAGINA -->
+	<footer th:fragment="footer" class="footer bg-info text-center text-dark">
+
+		<div class="container">
+			<p>Base-DatosSPI &copy; -SDH-<label id="footertext"></label></p>
+		</div>
+		<!-- Jquery Básico -->
+		<script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/home.js}" src="../static/js/home.js"></script>
+	</footer>
+
+</body>
+</html>

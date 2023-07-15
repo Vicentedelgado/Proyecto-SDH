@@ -1,0 +1,101 @@
+@charset "ISO-8859-1";
+
+.body1{
+	font-family: times,serif;
+	margin: 0 auto;
+	background-color:#dbdfe2;
+	background-image: url("/images/fondohome1.jpg");
+	background-size: cover; 
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	display:flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+header{
+	position:fixed;
+	left:0;
+	right:0;
+	top:0;
+	z-index:2;
+}
+
+/*
+ * Sidebar
+ */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  padding: 48px 0 0; /* Height of navbar */
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.alert{
+	text-align: center;
+    font-size: 150%;
+    margin-top: 4%;
+}
+
+.main{
+	padding-top:5rem;
+	margin-bottom: 100px;
+}
+
+.nav-item a:hover{
+	background:#5ab3c1;
+	transition:all 0.2s linear;	
+	border-radius:10px;
+}
+.nav-item button:hover{
+	background:#5ab3c1;
+	transition:all 0.2s linear;	
+	border-radius:10px;
+}
+.container{
+	width:100%;
+	max-width:1300px;
+	margin: 0 auto;
+}
+.imagenlogo{
+	width: 73px;
+	margin-right: 80px;
+}
+.imagenhome{
+	margin-left:20px;
+	width: 70%;
+}
+
+.card-header{
+	background-color:#6cd4ff;
+}
+
+.card-body{
+	background-color:#d9d9fa;
+}
+
+#cardhome{
+	margin-top: 100px;
+    	
+}
+
+input{
+	margin-left:8%;
+}
+
+.needs-validation a{
+	margin-left:34%;
+}
+p {
+    margin-bottom: 0rem !important;
+}
+
+
+/* //////////////*/
+.footer{
+	margin-top: auto;
+}
