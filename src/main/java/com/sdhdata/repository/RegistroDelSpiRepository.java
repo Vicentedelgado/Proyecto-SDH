@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.sdhdata.model.Activo;
 import com.sdhdata.model.RegistrodelSpi;
 import com.sdhdata.model.SpiDatos;
 
@@ -16,20 +15,18 @@ public interface RegistroDelSpiRepository extends CrudRepository<RegistrodelSpi,
 	Calendar fecha = Calendar.getInstance();
     int año = fecha.get(Calendar.YEAR);
 	@Query("SELECT u FROM RegistrodelSpi u WHERE u.idspi=:idspi and u.idactivo.idtipo=1")
-	List<RegistrodelSpi> Listaregistrodelspiinstalaciones(SpiDatos idspi);
+	public List<RegistrodelSpi> Listaregistrodelspiinstalaciones(SpiDatos idspi);
 	@Query("SELECT u FROM RegistrodelSpi u WHERE u.idspi=:idspi and u.idactivo.idtipo=2")
-	List<RegistrodelSpi> Listaregistrodelspibienes(SpiDatos idspi);
+	public List<RegistrodelSpi> Listaregistrodelspibienes(SpiDatos idspi);
 	@Query("SELECT u FROM RegistrodelSpi u WHERE u.idspi=:idspi and u.idactivo.idtipo=3")
-	List<RegistrodelSpi> Listaregistrodelspiequipos(SpiDatos idspi);
+	public List<RegistrodelSpi> Listaregistrodelspiequipos(SpiDatos idspi);
 	@Query("SELECT u FROM RegistrodelSpi u WHERE u.idspi=:idspi and u.idactivo.idtipo=4")
-	List<RegistrodelSpi> Listaregistrodelspiotros(SpiDatos idspi);
+	public List<RegistrodelSpi> Listaregistrodelspiotros(SpiDatos idspi);
 	@Query("SELECT u FROM RegistrodelSpi u WHERE u.idspi=:idspi and u.idactivo.idtipo=5")
-	List<RegistrodelSpi> Listaregistrodelspimovilidad(SpiDatos idspi);
+	public List<RegistrodelSpi> Listaregistrodelspimovilidad(SpiDatos idspi);
 	@Query("SELECT u FROM RegistrodelSpi u WHERE u.idspi=:idspi and u.idactivo.idtipo=6")
-	List<RegistrodelSpi> Listaregistrodelspiconectividad(SpiDatos idspi);
-	/*
-	 * @Query("SELECT u FROM RegistrodelSpi u WHERE u.pariodo=:año and u.idactivo.idactivo=:activo"
-	 * ) List<RegistrodelSpi> Listaregistroinventario(Activo activo);
-	 */
-
+	public List<RegistrodelSpi> Listaregistrodelspiconectividad(SpiDatos idspi);
+	@Query("SELECT u FROM RegistrodelSpi u WHERE u.idinstitucion.idinstitucion=:idinstitucion")
+	public List<RegistrodelSpi> Buscaregistroinstitucion(Long idinstitucion);
+	
 }

@@ -40,5 +40,7 @@ public interface RRHHRepository extends CrudRepository<RRHH, Long> {
 	List<RRHH> listarrhhzona9();
 	@Query("SELECT u FROM RRHH u WHERE u.cedula=:cedula")
 	List<RRHH> Listaporcedularrhh(String cedula);
+	@Query("SELECT u FROM RRHH u WHERE u.idunidad.idunidad=:idunidad")
+	List<RRHH> Buscarporunidad(Long idunidad);
 
 }

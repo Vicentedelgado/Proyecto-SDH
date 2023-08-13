@@ -23,8 +23,11 @@ import com.sdhdata.model.Zona;
 import com.sdhdata.model.Activo;
 import com.sdhdata.model.Tipo;
 import com.sdhdata.model.Modalidad;
+import com.sdhdata.model.RegistrodelSpi;
 import com.sdhdata.model.Unidad;
 import com.sdhdata.model.Roles;
+import com.sdhdata.model.SpiDatos;
+import com.sdhdata.model.RRHH;
 import com.sdhdata.service.IUsersService;
 import com.sdhdata.service.IInstitucionService;
 import com.sdhdata.service.IZonaService;
@@ -33,7 +36,9 @@ import com.sdhdata.service.ITipoService;
 import com.sdhdata.service.IUnidadService;
 import com.sdhdata.service.IModalidadService;
 import com.sdhdata.service.IRolesService;
-
+import com.sdhdata.service.ISpiDatosService;
+import com.sdhdata.service.IRegistroDelSpiService;
+import com.sdhdata.service.IRRHHService;
 
 @Controller
 @RequestMapping("/views/DataSpi/Admin")
@@ -55,6 +60,12 @@ public class AdminController {
 	private IUnidadService IUnidadService;
 	@Autowired
 	private IModalidadService IModalidadService;
+	@Autowired
+	private ISpiDatosService ISpiDatosService;
+	@Autowired
+	private IRegistroDelSpiService IRegistroDelSpiService;
+	@Autowired
+	private IRRHHService IRRHHService;
 	
 	@GetMapping("/")
 	public String AdminPage (Model model) {
@@ -473,6 +484,9 @@ public class AdminController {
 	@GetMapping("/deleteinstitucion/{idinstitucion}")
 	public String deleteinstitucion(@PathVariable("idinstitucion") Long idinstitucion, RedirectAttributes alerta) {
 		Institucion Ins = null;
+		
+		List<SpiDatos> spidatos = ISpiDatosService.BuscarporInstitucion(idinstitucion);
+		List<RegistrodelSpi> registrospi = IRegistroDelSpiService.Buscaregistroinstitucion(idinstitucion);
 		if(idinstitucion > 0) {
 			Ins = IInstitucionService.buscarPorId(idinstitucion);
 			if(Ins == null) {
@@ -485,6 +499,15 @@ public class AdminController {
 			alerta.addFlashAttribute("warning", "NO EXISTE ESTA INSTITUCIÓN");
 			return "redirect:/views/DataSpi/Admin/instituciones";
 		}
+		if(spidatos.size()>=1 || registrospi.size()>=1 ) {
+			System.out.print("NO SE PUEDE ELIMINAR PORQUE: "+ Ins.getNombre()+
+					" está siendo usada en un registro del SPI");
+			alerta.addFlashAttribute("error", "NO SE PUEDE ELIMINAR PORQUE: "+ Ins.getNombre()+
+					" está siendo usada en un registro del SPI");
+			return "redirect:/views/DataSpi/Admin/instituciones";
+			
+		}
+		
 		IInstitucionService.eliminar(idinstitucion);
 		System.out.print("REGISTRO ELIMINADO CON ÉXITO");
 		alerta.addFlashAttribute("success", "REGISTRO ELIMINADO CON ÉXITO");
@@ -530,6 +553,7 @@ public class AdminController {
 	@GetMapping("/deleteunidad/{idunidad}")
 	public String deleteunidad(@PathVariable("idunidad") Long idunidad, RedirectAttributes alerta) {
 		Unidad Uni = null;
+		List<RRHH> rrhhunidad = IRRHHService.Buscarporunidad(idunidad);
 		if(idunidad > 0) {
 			Uni = IUnidadService.buscarporId(idunidad);
 			if(Uni == null) {
@@ -542,7 +566,14 @@ public class AdminController {
 			alerta.addFlashAttribute("warning", "NO EXISTE ESTA UNIDAD");
 			return "redirect:/views/DataSpi/Admin/unidades";
 		}
-		
+		if(rrhhunidad.size()>=1 ) {
+			System.out.print("NO SE PUEDE ELIMINAR PORQUE: "+ Uni.getNombre()+
+					" está siendo usada en un registro del RRHH");
+			alerta.addFlashAttribute("error", "NO SE PUEDE ELIMINAR PORQUE: "+ Uni.getNombre()+
+					" está siendo usada en un registro del RRHH");
+			return "redirect:/views/DataSpi/Admin/unidades";
+			
+		}
 		IUnidadService.eliminar(idunidad);
 		System.out.print("REGISTRO ELIMINADO CON ÉXITO");
 		alerta.addFlashAttribute("success", "REGISTRO ELIMINADO CON ÉXITO");

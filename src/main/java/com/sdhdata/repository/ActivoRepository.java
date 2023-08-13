@@ -19,5 +19,7 @@ public interface ActivoRepository extends CrudRepository<Activo, Long> {
 	
 	@Query("SELECT u FROM Activo u WHERE u.nombre=:nombre")
 	public List<Activo> Buscarpornombre(String nombre);
+	
+	public Activo findByNombre(String nombre);
 
 }

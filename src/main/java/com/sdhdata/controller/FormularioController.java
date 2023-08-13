@@ -122,7 +122,7 @@ public class FormularioController {
 	}
 	
 	//LLENAR FORMULARIO
-  	@Secured({"ROLE_ADMIN", "ROLE_VISITOR"})
+  	@Secured({"ROLE_ADMIN", "ROLE_VISITOR", "ROLE_ATTEND"})
 	@RequestMapping(value="/listaporspi/{idspi}", method=RequestMethod.GET)
 	public String Listaporspi(@PathVariable("idspi") Long idspi,@PathVariable("idspi") SpiDatos idspi1, Model model, @ModelAttribute("idzona") Zona idzona, @ModelAttribute("idtipo") Tipo idtipo){
 		//títulos cards

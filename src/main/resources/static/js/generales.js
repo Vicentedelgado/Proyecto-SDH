@@ -151,8 +151,8 @@ $('#saveModalActivo').on('show.bs.modal', function (event) {
     $("#Guardaractivo").val("Guardar");
 });
 
-$('#saveModalInstitucion').on('show.bs.modal', function (event) {
-	$("#saveModalInstitucion input").val('');
+$('#saveinstitucionModal').on('show.bs.modal', function (event) {
+	$("#saveinstitucionModal input").val('');
     $("#GuardarInstitucion").val("Guardar");
 });
 
@@ -287,13 +287,7 @@ function Deleteinstitucion(idinstitucion){
 			console.log(res);
 		}
 	});
-    swal("¡Puf! ¡Institución ha sido eliminada!", {
-      icon: "success",
-    }).then((OK)=>{
-		if(OK){
-			location.href="http://localhost:9898/views/DataSpi/Admin/instituciones";
-		}
-    });
+    
   } else {
     swal("¡Institución está a salvo!");
   }

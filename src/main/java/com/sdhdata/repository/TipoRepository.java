@@ -8,6 +8,8 @@ import com.sdhdata.model.Tipo;
 
 @Repository
 public interface TipoRepository extends CrudRepository<Tipo, Long> {
+	
+	public Tipo findByNombre(String nombre);
 		
 
 }

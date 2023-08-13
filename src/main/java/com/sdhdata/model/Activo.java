@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+
 @Entity
 @Table(name="activo")
 public class Activo implements Serializable{

@@ -16,5 +16,8 @@ public interface SpiDatosRepository extends CrudRepository<SpiDatos, Long> {
 	
 	@Query("SELECT u FROM SpiDatos u WHERE u.idzona=:idzona")
 	public List<SpiDatos> FindByZona(Zona idzona);
+	
+	@Query("SELECT u FROM SpiDatos u WHERE u.idinstitucion.idinstitucion=:idinstitucion")
+	public List<SpiDatos> BuscarporInstitucion(Long idinstitucion);
 
 }

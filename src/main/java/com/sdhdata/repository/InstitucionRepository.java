@@ -12,5 +12,7 @@ import com.sdhdata.model.Institucion;
 public interface InstitucionRepository extends CrudRepository<Institucion, Long> {
 	@Query("SELECT u FROM Institucion u WHERE u.nombre=:nombre")
 	List<Institucion> listainsnombre(String nombre);
+	
+	public Institucion findByNombre(String nombre);
 
 }

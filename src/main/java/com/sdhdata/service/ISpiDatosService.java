@@ -12,5 +12,6 @@ public interface ISpiDatosService {
 	public void eliminar(Long idspi);
 	public List<SpiDatos> Listaporspi(Long idspi);
 	public List<SpiDatos>  FindByZona(Zona idzona);
+	public List<SpiDatos> BuscarporInstitucion(Long idinstitucion);
 
 }

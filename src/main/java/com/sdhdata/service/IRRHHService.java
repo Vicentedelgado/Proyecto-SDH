@@ -25,5 +25,6 @@ public interface IRRHHService {
 	public List<RRHH> listarrhhzona8();
 	public List<RRHH> listarrhhzona9();
 	public List<RRHH> Listaporcedularrhh(String cedula);
+	public List<RRHH> Buscarporunidad(Long idunidad);
 
 }

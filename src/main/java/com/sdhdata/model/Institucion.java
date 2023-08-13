@@ -37,6 +37,18 @@ public class Institucion implements Serializable{
 	}
 	
 	
+	public Institucion() {
+		super();
+	}
+	public Institucion(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
+	public Institucion(Long idinstitucion, String nombre) {
+		super();
+		this.idinstitucion = idinstitucion;
+		this.nombre = nombre;
+	}
 	@Override
 	public String toString() {
 		return "Institucion [idinstitucion=" + idinstitucion + ", nombre=" + nombre + "]";

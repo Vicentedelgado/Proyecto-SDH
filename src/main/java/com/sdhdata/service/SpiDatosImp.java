@@ -19,40 +19,39 @@ public class SpiDatosImp implements ISpiDatosService {
 	
 	@Override
 	public List<SpiDatos> listaspidatos() {
-		// TODO Auto-generated method stub
 		return (List<SpiDatos>) SpiDatosRepository.findAll();
 	}
 
 	@Override
 	public void guardar(SpiDatos SpiDatos) {
-		// TODO Auto-generated method stub
 		SpiDatosRepository.save(SpiDatos);
 
 	}
 
 	@Override
 	public SpiDatos buscarPorId(Long idspi) {
-		// TODO Auto-generated method stub
 		return SpiDatosRepository.findById(idspi).orElse(null);
 	}
 
 	@Override
 	public void eliminar(Long idspi) {
-		// TODO Auto-generated method stub
 		SpiDatosRepository.deleteById(idspi);
 
 	}
 
 	@Override
 	public List<SpiDatos> Listaporspi(Long idspi) {
-		// TODO Auto-generated method stub
 		return SpiDatosRepository.Listaporspi(idspi);
 	}
 
 	@Override
 	public List<SpiDatos> FindByZona(Zona idzona) {
-		// TODO Auto-generated method stub
 		return SpiDatosRepository.FindByZona(idzona);
+	}
+
+	@Override
+	public List<SpiDatos> BuscarporInstitucion(Long idinstitucion) {
+		return SpiDatosRepository.BuscarporInstitucion(idinstitucion);
 	}
 
 	
