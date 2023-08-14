@@ -1189,7 +1189,7 @@
 											<label class="col-md-2" for="institucionnuevo">Institución:</label> 
 											<input type="text" th:field="*{nombre}" onkeyup="javascript:this.value=this.value.toUpperCase();" class="form-control form-control-sm col-md-7 shadow" id="institucionnuevo"
 												name="institucionnuevo" placeholder="Ej. MIES" autocomplete="off" 
-												contenteditable = "true" spellcheck = "true" minlength="2" maxlength="35" required> 
+												contenteditable = "true" spellcheck = "true" minlength="2" onkeypress="return ValidOnlyWords(event);" maxlength="35" required> 
 											<small class="invalid-feedback col-md-8">Ingrese nombre de la Institución!</small> 
 										</div>
 										<div class="modal-footer bg-info">

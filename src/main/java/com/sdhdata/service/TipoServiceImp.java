@@ -18,28 +18,31 @@ public class TipoServiceImp implements ITipoService {
 
 	@Override
 	public List<Tipo> listatipos() {
-		// TODO Auto-generated method stub
 		return (List<Tipo>) TipoRepository.findAll();
 	}
 
 	@Override
 	public void guardar(Tipo Tipo) {
-		// TODO Auto-generated method stub
 		TipoRepository.save(Tipo);
 
 	}
 
 	@Override
 	public Tipo buscarporId(Long idtipo) {
-		// TODO Auto-generated method stub
 		return TipoRepository.findById(idtipo).orElse(null);
 	}
 
 	@Override
 	public void eliminar(Long idtipo) {
-		// TODO Auto-generated method stub
 		TipoRepository.deleteById(idtipo);
 
 	}
+
+	@Override
+	public List<Tipo> listapornombre(String nombre) {
+		return TipoRepository.listapornombre(nombre);
+	}
+	
+	
 
 }

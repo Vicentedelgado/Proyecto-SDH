@@ -127,6 +127,60 @@ public class SpiDatos implements Serializable,Comparable<SpiDatos>{
 		this.archivo = archivo;
 	}
 	
+	public SpiDatos() {
+		super();
+	}
+	
+	public SpiDatos(Institucion idinstitucion, Zona idzona, @NotEmpty String nombre, @NotEmpty String daservicioa,
+			@NotEmpty String direccion, @NotEmpty String telefono, @NotNull int numerodeoficina,
+			@NotEmpty String convenio, @NotEmpty String observaciones, Date fechafinconvenio, String archivo) {
+		super();
+		this.idinstitucion = idinstitucion;
+		this.idzona = idzona;
+		this.nombre = nombre;
+		this.daservicioa = daservicioa;
+		this.direccion = direccion;
+		this.telefono = telefono;
+		this.numerodeoficina = numerodeoficina;
+		this.convenio = convenio;
+		this.observaciones = observaciones;
+		this.fechafinconvenio = fechafinconvenio;
+		this.archivo = archivo;
+	}
+	
+	public SpiDatos(@NotEmpty String nombre, @NotEmpty String daservicioa, @NotEmpty String direccion,
+			@NotEmpty String telefono, @NotNull int numerodeoficina, @NotEmpty String convenio,
+			@NotEmpty String observaciones, Date fechafinconvenio, String archivo) {
+		super();
+		this.nombre = nombre;
+		this.daservicioa = daservicioa;
+		this.direccion = direccion;
+		this.telefono = telefono;
+		this.numerodeoficina = numerodeoficina;
+		this.convenio = convenio;
+		this.observaciones = observaciones;
+		this.fechafinconvenio = fechafinconvenio;
+		this.archivo = archivo;
+	}
+	
+	public SpiDatos(Long idspi, Institucion idinstitucion, Zona idzona, @NotEmpty String nombre,
+			@NotEmpty String daservicioa, @NotEmpty String direccion, @NotEmpty String telefono,
+			@NotNull int numerodeoficina, @NotEmpty String convenio, @NotEmpty String observaciones,
+			Date fechafinconvenio, String archivo) {
+		super();
+		this.idspi = idspi;
+		this.idinstitucion = idinstitucion;
+		this.idzona = idzona;
+		this.nombre = nombre;
+		this.daservicioa = daservicioa;
+		this.direccion = direccion;
+		this.telefono = telefono;
+		this.numerodeoficina = numerodeoficina;
+		this.convenio = convenio;
+		this.observaciones = observaciones;
+		this.fechafinconvenio = fechafinconvenio;
+		this.archivo = archivo;
+	}
 	@Override
 	public String toString() {
 		return "SpiDatos [idspi=" + idspi + ", idinstitucion=" + idinstitucion + ", idzona=" + idzona + ", nombre="

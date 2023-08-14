@@ -54,7 +54,7 @@ public class TestCategoria {
 	@Test
 	@Order(3)
 	public void buscarpornombrenoexistente() {
-		String nombre = "Instalaciones";
+		String nombre = "Instalaciones1";
 		Tipo tipo = repository.findByNombre(nombre);
 		assertNull(tipo);
 		
@@ -64,9 +64,9 @@ public class TestCategoria {
 	@Rollback(false)
 	@Order(4)
 	public void testActualizarCategoria() {
-		long id = 1;
-		String nombrecategoria = "Instalaciones";
-		String descripcion = "Edificio construcción";
+		long id = 14;
+		String nombrecategoria = "Tecnologia 1";
+		String descripcion = "tecnologia 1 de 1";
 		Tipo tipo = new Tipo(nombrecategoria, descripcion);
 		tipo.setIdtipo(id);
 		
@@ -93,7 +93,7 @@ public class TestCategoria {
 	@Order(6)
 	public void testEliminarCategoria() {
 		
-		long id = 1;
+		long id = 17;
 		boolean siExistenteAntesDeEliminar = repository.findById(id).isPresent();
 		
 		repository.deleteById(id);

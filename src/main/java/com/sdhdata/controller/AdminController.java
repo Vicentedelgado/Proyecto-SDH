@@ -135,6 +135,7 @@ public class AdminController {
 		Institucion institucion = new Institucion();
 		//VENTANA
 		model.addAttribute("titulo","Página: Instituciones de la SDH");
+		model.addAttribute("titulo0","Página: Unidades de la SDH");
 		model.addAttribute("listainstituciones",listainstituciones);
 		model.addAttribute("institucion",institucion);
 		return "/views/DataSpi/Admin/institucion";
@@ -148,7 +149,7 @@ public class AdminController {
 		Activo activo=new Activo();
 		//VENTANA
 		model.addAttribute("titulo","Página: Bienes/Servicios de SDH");
-		model.addAttribute("titulo1","Zonas");
+		model.addAttribute("titulo0","Muestra una lista de bienes y servicios");
 		model.addAttribute("listaactivos",listaactivos);
 		model.addAttribute("listatipos",listatipos);
 		model.addAttribute("activo",activo);
@@ -166,7 +167,7 @@ public class AdminController {
 		
 		//VENTANA
 		model.addAttribute("titulo","Página: Categoría de bien");
-		model.addAttribute("titulo1","Zonas");
+		model.addAttribute("titulo0","Categorías de los bienes y servicios de la SDH");
 		model.addAttribute("listatipos",listatipos);
 		model.addAttribute("tipo",tipo);
 		return "/views/DataSpi/Admin/tipo";
@@ -179,6 +180,7 @@ public class AdminController {
 		Unidad unidad = new Unidad();
 		//VENTANA
 		model.addAttribute("titulo","Página: Unidades de la SDH");
+		model.addAttribute("titulo0","Se muestra la información de las unidades de atención existentes en un SPI");
 		model.addAttribute("listaunidad",listaunidad);
 		model.addAttribute("unidad",unidad);
 		return "/views/DataSpi/Admin/unidad";
@@ -362,10 +364,16 @@ public class AdminController {
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/savetipo")
 	public String guardaritipo(@Valid @ModelAttribute Tipo tipo, BindingResult result, RedirectAttributes alerta) {
-		
+		List<Tipo> listatipornombre = ITipoService.listapornombre(tipo.getNombre());
+		if(listatipornombre.size()>=1 && tipo.getIdtipo()==null) {
+			System.out.print("Ya existe la categoría: "+ tipo.getNombre());
+			alerta.addFlashAttribute("info", "Ya existe la categoría: "+ tipo.getNombre());
+			return "redirect:/views/DataSpi/Admin/tipos";
+			
+		}
 		if(result.hasErrors()) {
 			System.out.print("HUBO ERRORES EN EL FORMULARIO TIPO");
-			return "/views/DataSpi/Admin/tipo";
+			return "/views/DataSpi/Admin/tipos";
 		}
 		ITipoService.guardar(tipo);
 		System.out.print("REGISTRO TIPO GUARDADO CON ÉXITO");
@@ -524,18 +532,7 @@ public class AdminController {
 		alerta.addFlashAttribute("success", "REGISTRO ELIMINADO CON ÉXITO");
 		return "redirect:/views/DataSpi/Admin/activos";
 	}
-	//Eliminar
-	@Secured("ROLE_ADMIN")
-	@GetMapping("/deletetipo/{idtipo}")
-	public String deletetipo(@PathVariable("idtipo") Long idtipo, RedirectAttributes alerta) {
-		
-		
-		ITipoService.eliminar(idtipo);
-		System.out.print("REGISTRO ELIMINADO CON ÉXITO");
-		alerta.addFlashAttribute("success", "REGISTRO ELIMINADO CON ÉXITO");
-		return "redirect:/views/DataSpi/Admin/tipos";
-	}
-
+	
 	//Eliminar
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/deletemodalidad/{idmodalidad}")
@@ -579,6 +576,42 @@ public class AdminController {
 		alerta.addFlashAttribute("success", "REGISTRO ELIMINADO CON ÉXITO");
 		return "redirect:/views/DataSpi/Admin/unidades";
 	}
+	
+	//Eliminar
+	@Secured("ROLE_ADMIN")
+	@GetMapping("/deletetipo/{idtipo}")
+	public String deletetipo(@PathVariable("idtipo") Long idtipo, RedirectAttributes alerta) {
+		Tipo Tip = null;
+		List<Activo> idactivotipo = IActivoService.Buscarportipolong(idtipo);
+		List<RegistrodelSpi> idregistrotipo = IRegistroDelSpiService.Buscaregistrotipo(idtipo);
+		
+		if(idtipo > 0) {
+			Tip = ITipoService.buscarporId(idtipo);
+			if(Tip == null) {
+				System.out.print("Error: La categoría no existe");
+				alerta.addFlashAttribute("warning", "NO EXISTE ESTA CATEGORÍA");
+				return "redirect:/views/DataSpi/Admin/tipos";
+			}
+		}else {
+			System.out.print("Error: La categoría no existe");
+			alerta.addFlashAttribute("warning", "NO EXISTE ESTA CATEGORÍA");
+			return "redirect:/views/DataSpi/Admin/tipos";
+		}
+		if(idactivotipo.size()>=1 || idregistrotipo.size()>=1) {
+			System.out.print("NO SE PUEDE ELIMINAR PORQUE: "+ Tip.getNombre()+
+					" está siendo usada en un registro del SPI o activo");
+			alerta.addFlashAttribute("error", "NO SE PUEDE ELIMINAR PORQUE: "+ Tip.getNombre()+
+					" está siendo usada en un registro del SPI o activo");
+			return "redirect:/views/DataSpi/Admin/tipos";
+			
+		}
+		ITipoService.eliminar(idtipo);
+		System.out.print("REGISTRO CATEGORÍA ELIMINADO CON ÉXITO");
+		alerta.addFlashAttribute("success", "REGISTRO CATEGORÍA ELIMINADO CON ÉXITO");
+		return "redirect:/views/DataSpi/Admin/tipos";
+	}
+	
+	
 
 
 }

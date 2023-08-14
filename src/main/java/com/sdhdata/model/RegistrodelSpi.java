@@ -141,6 +141,47 @@ public class RegistrodelSpi implements Serializable{
 		this.observaciones = observaciones;
 	}
 	
+	public RegistrodelSpi() {
+		super();
+	}
+	
+	
+	public RegistrodelSpi(String estado, @NotNull Short cantidad, @NotNull Short cantidadrequerida,
+			@NotNull Short holguradecantidad, String prioridad, @NotEmpty String accionrealizada,
+			@NotNull String periodo, Date fechaaccion, String archivo, @NotEmpty String observaciones) {
+		super();
+		this.estado = estado;
+		this.cantidad = cantidad;
+		this.cantidadrequerida = cantidadrequerida;
+		this.holguradecantidad = holguradecantidad;
+		this.prioridad = prioridad;
+		this.accionrealizada = accionrealizada;
+		this.periodo = periodo;
+		this.fechaaccion = fechaaccion;
+		this.archivo = archivo;
+		this.observaciones = observaciones;
+	}
+	
+	
+	public RegistrodelSpi(Activo idactivo, SpiDatos idspi, Institucion idinstitucion, String estado,
+			@NotNull Short cantidad, @NotNull Short cantidadrequerida, @NotNull Short holguradecantidad,
+			String prioridad, @NotEmpty String accionrealizada, @NotNull String periodo, Date fechaaccion,
+			String archivo, @NotEmpty String observaciones) {
+		super();
+		this.idactivo = idactivo;
+		this.idspi = idspi;
+		this.idinstitucion = idinstitucion;
+		this.estado = estado;
+		this.cantidad = cantidad;
+		this.cantidadrequerida = cantidadrequerida;
+		this.holguradecantidad = holguradecantidad;
+		this.prioridad = prioridad;
+		this.accionrealizada = accionrealizada;
+		this.periodo = periodo;
+		this.fechaaccion = fechaaccion;
+		this.archivo = archivo;
+		this.observaciones = observaciones;
+	}
 	@Override
 	public String toString() {
 		return "RegistrodelSpi [idregistro=" + idregistro + ", idactivo=" + idactivo + ", idspi=" + idspi

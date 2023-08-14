@@ -16,7 +16,8 @@ public interface ActivoRepository extends CrudRepository<Activo, Long> {
 	
 	@Query("SELECT u FROM Activo u WHERE u.idtipo=:idtipo")
 	public List<Activo> Buscarportipo(Tipo idtipo);
-	
+	@Query("SELECT u FROM Activo u WHERE u.idtipo.idtipo=:idtipo")
+	public List<Activo> Buscarportipolong(Long idtipo);
 	@Query("SELECT u FROM Activo u WHERE u.nombre=:nombre")
 	public List<Activo> Buscarpornombre(String nombre);
 	

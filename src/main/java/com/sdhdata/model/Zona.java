@@ -40,6 +40,21 @@ public class Zona implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	public Zona() {
+		super();
+	}
+	
+	public Zona(Long idzona, String nombre) {
+		super();
+		this.idzona = idzona;
+		this.nombre = nombre;
+	}
+
+	public Zona(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
 
 	@Override
 	public String toString() {

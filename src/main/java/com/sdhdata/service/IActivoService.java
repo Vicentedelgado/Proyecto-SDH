@@ -13,6 +13,8 @@ public interface IActivoService {
 	public void eliminar(Long idactivo);
 	public List<Activo> Buscarportipo(Tipo idtipo);
 	public List<Activo> Buscarpornombre(String nombre);
+	public List<Activo> Buscarportipolong(Long idtipo);
+	
 	
 
 }

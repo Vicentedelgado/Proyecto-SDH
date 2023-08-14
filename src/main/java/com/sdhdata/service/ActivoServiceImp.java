@@ -51,6 +51,11 @@ public class ActivoServiceImp implements IActivoService {
 	public List<Activo> Buscarpornombre(String nombre) {
 		return ActivoRepository.Buscarpornombre(nombre);
 	}
+
+	@Override
+	public List<Activo> Buscarportipolong(Long idtipo) {
+		return ActivoRepository.Buscarportipolong(idtipo);
+	}
 	
 
 	

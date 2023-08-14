@@ -10,5 +10,6 @@ public interface ITipoService {
 	public void guardar (Tipo Tipo);
 	public Tipo buscarporId(Long idtipo);
 	public void eliminar(Long idtipo);
+	public List<Tipo> listapornombre(String nombre);
 
 }

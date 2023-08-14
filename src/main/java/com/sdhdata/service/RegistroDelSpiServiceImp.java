@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sdhdata.model.Institucion;
 
 //import com.itextpdf.text.BaseColor;
 //import com.itextpdf.text.Document;
@@ -100,6 +99,11 @@ public class RegistroDelSpiServiceImp implements IRegistroDelSpiService {
 	@Override
 	public List<RegistrodelSpi> Buscaregistroinstitucion(Long idinstitucion) {
 		return (List<RegistrodelSpi>) RegistroDelSpiRepository.Buscaregistroinstitucion(idinstitucion);
+	}
+
+	@Override
+	public List<RegistrodelSpi> Buscaregistrotipo(Long idtipo) {
+		return RegistroDelSpiRepository.Buscaregistrotipo(idtipo);
 	}
 
 		

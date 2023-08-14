@@ -64,7 +64,12 @@ header{
 .container{
 	width:100%;
 	max-width:1300px;
-	margin: 0 auto;
+	margin: 0 auto;	
+}
+
+.containerpadding{
+	padding: 15px;
+    border-radius: 5px;
 }
 
 .imagenlogo{
