@@ -54,6 +54,26 @@ $(function(){
 	
 });
 
+//Ordenar lista zona
+
+$(document).ready(()=>{
+	let select = $('#spiporzona').children('option').get();
+	
+	select.sort(function(a,b){
+		let select1= $(a).text().toUpperCase();
+		let select2= $(a).text().toUpperCase();
+		
+		return select1 < select2 ? -1 : (select1 > select2) ? 1 : 0;
+		
+	});
+	
+	$.each(select, function(indice,elemento){
+		$('#spiporzona').append(elemento);
+	});
+	
+});
+
+
 //Validaciones de Bootstrap 
 (function() {
 	  'use strict';
