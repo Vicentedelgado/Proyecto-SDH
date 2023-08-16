@@ -54,6 +54,11 @@ public class SpiDatosImp implements ISpiDatosService {
 		return SpiDatosRepository.BuscarporInstitucion(idinstitucion);
 	}
 
+	@Override
+	public List<SpiDatos> BuscarporZona(Long idzona) {
+		return SpiDatosRepository.BuscarporZona(idzona);
+	}
+
 	
 	
 }

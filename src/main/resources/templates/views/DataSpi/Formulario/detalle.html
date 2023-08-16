@@ -35,13 +35,13 @@
 					</div>	
 				</div>
 			</div><br>
-			<div class="card bg-light border-info" sec:authorize="hasRole('ROLE_ADMIN')">
+			<div class="card bg-light border-info" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">
 				<div class="card-header bg-info text-white" th:text="${titulo1}"></div>
 				<form id="cardeditarbody" th:action="@{/views/DataSpi/Formulario/saveedit}" th:object="${registrodelspi}" method="post" enctype="multipart/form-data"
 				class="needs-validation" novalidate>
 				<div class="card-boby" >
 				    <!--FORMULARIO PÁGINA-->
-				    <div class="container" id="cardeditar" sec:authorize="hasRole('ROLE_ADMIN')">
+				    <div class="container" id="cardeditar" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">
 				    	<div class="form-row">
 						<div class="form-group col-md-6">
 							<div class="form-group row">

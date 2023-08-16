@@ -172,6 +172,16 @@ $('#saveunidadModal').on('show.bs.modal', function (event) {
 	$("#saveunidadModal input").val('');
     $("#GuardarUnidad").val("Guardar");
 });
+$('#savezonaModal').on('show.bs.modal', function (event) {
+	$("#savezonaModal input").val('');
+    $("#GuardarZona").val("Guardar");
+});
+$('#saveactivoModal').on('show.bs.modal', function (event) {
+	$("#saveactivoModal input").val('');
+	$("#saveactivoModal select").val("");
+	$("#saveactivoModal textarea").val('');
+    $("#GuardarActivo").val("Guardar");
+});
 //Calcular el valor faltante
 function faltante(){
 	try{
@@ -236,36 +246,6 @@ function Delete(idrol){
     });
   } else {
     swal("¡Tu usuario está a salvo!");
-  }
-});
-}
-
-//Alerta de verificacion borrar zona
-function Deletezona(idzona){
-	swal({
-  title: "¿Estás seguro?",
-  text: "¡Una vez eliminado, no podrá recuperar esta zona!",
-  icon: "warning",
-  buttons: ["Cancelar", true],
-  dangerMode: true,
-})
-.then((OK) => {
-  if (OK) {
-	$.ajax({
-		url: "//localhost:9898/views/DataSpi/Admin/deletezona/"+ idzona,
-		success: function (res){
-			console.log(res);
-		}
-	});
-    swal("¡Puf! ¡La zona ha sido eliminada!", {
-      icon: "success",
-    }).then((OK)=>{
-		if(OK){
-			location.href="http://localhost:9898/views/DataSpi/Admin/zonas";
-		}
-    });
-  } else {
-    swal("¡la zona está a salvo!");
   }
 });
 }

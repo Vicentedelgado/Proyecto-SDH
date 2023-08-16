@@ -106,6 +106,11 @@ public class RegistroDelSpiServiceImp implements IRegistroDelSpiService {
 		return RegistroDelSpiRepository.Buscaregistrotipo(idtipo);
 	}
 
+	@Override
+	public List<RegistrodelSpi> BuscarporActivo(Long idactivo) {
+		return RegistroDelSpiRepository.BuscarporActivo(idactivo);
+	}
+
 		
 	
 

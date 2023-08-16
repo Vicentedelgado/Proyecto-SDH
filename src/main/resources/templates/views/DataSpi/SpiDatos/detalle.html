@@ -33,7 +33,7 @@
 					</div>	
 				</div>
 			</div><br>
-			<div class="card bg-light border-info" sec:authorize="hasRole('ROLE_ADMIN')">
+			<div class="card bg-light border-info" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">
 				<div class="card-header bg-info text-white" th:text="${titulo1}"></div>
 				<form id="cardeditarbody" th:action="@{/views/DataSpi/SpiDatos/saveedit}" th:object="${spidatos}" method="post" enctype="multipart/form-data"
 				class="needs-validation" novalidate>

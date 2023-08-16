@@ -6,7 +6,7 @@
 </head>
 <body class="body1">
 	<header th:replace="plantilla/template :: header"></header>
-	<main class="main col-md-9 ml-sm-auto col-lg-10 px-md-4">
+	<main class="main col-md-20 ml-sm-auto col-lg-10 px-md-4">
 		<div class="container">
 			<h1 th:text="${titulo}"></h1>
 			<h5 th:text="${titulo0}"></h5>
@@ -22,7 +22,7 @@
 		</div>
 		<br>
 		<!-- TABLAS RRHH-->
-		<div class="container">
+		<div class="container containerpadding bg-secondary">
 		<div class="table-responsive">
 						<table id="" class="display nowrap table table-bordered table-striped table-sm table-hover" style="width: 100%">
 							<thead class="thead bg-info text-white">
@@ -49,8 +49,8 @@
 										</div>
 									</td>
 									<td sec:authorize="isAuthenticated()">
-										<a th:href="@{/views/DataSpi/Admin/deleteactivo/} + ${item.idactivo}" title="Eliminar" target="black">
-											<svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16" title="Editar" target="black">
+										<a th:href="@{/views/DataSpi/Admin/deleteactivo/} + ${item.idactivo}" title="Eliminar" onclick="return confirm('¿Estás seguro de eliminar este Bien o Servicio?')" target="black">
+											<svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" fill="currentColor" class="bi bi-trash text-danger" viewBox="0 0 16 16" title="Editar" target="black">
 											  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
 											  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
 											</svg>
@@ -92,26 +92,26 @@
 											<option selected disabled value="">Seleccionar categoría...</option>
 											<option th:each="tipo:${listatipos}" th:value="${tipo.idtipo}" th:text="${tipo.nombre}"></option>
 										</select>
-										<small class="invalid-feedback col-md-8">Seleccione la categoría del bien!</small>
+										<small class="invalid-feedback col-md-7">Seleccione la categoría del bien/servicio!</small>
 									</div>
 									<div class="form-group row">
 										<label class="col-md-3" for="activonombre1">Bien o Servicio:</label>
 										<input type="hidden" th:field="*{idactivo}" id="idactivo1"name="idactivo1">
 										<input type="text" th:field="*{nombre}" id="activonombre1" class="form-control form-control-sm col-md-7 shadow" 
 										 placeholder="Ej.Computadora, Luz eléctrica" spellcheck = "true" autocomplete="off" name="activonombre1" minlength="2" maxlength="30" required>
-										<small class="invalid-feedback col-md-8">Agregue el nombre del bien/servicio!</small>
+										<small class="invalid-feedback col-md-7">Agregue el nombre del bien/servicio!</small>
 									</div>
 									<div class="form-group row">
 										<label class="col-md-3" for="descripcion1">Descripcion:</label>
 										<textarea type="text" th:field="*{descripcion}" id="descripcion1" class="form-control form-control-sm col-md-7 shadow" name="descripcion1" 
 										 placeholder="Ej.Computadora de escritorio" autocomplete="off" 
 													contenteditable = "true" spellcheck = "true" minlength="2" maxlength="35" required></textarea>
-										<small class="invalid-feedback col-md-8">Ingrese una pequeña descripción del bien o servicio!</small>
+										<small class="invalid-feedback col-md-7">Ingrese una pequeña descripción del bien o servicio!</small>
 									</div>
 									
 									<div class="modal-footer bg-info">
 										<button type="button" class="btn btn-primary btn-sm rounded-pill shadow" data-dismiss="modal">Cancelar</button>
-										<input type="submit" class="btn btn-success btn-sm rounded-pill shadow" value="Guardar cambios" />
+										<input type="submit" class="btn btn-success btn-sm rounded-pill shadow" id="GuardarActivo" value="Guardar" />
 									</div>
 								</div>
 							</div>
@@ -141,24 +141,30 @@
 								</div>
 								<div class="modal-body">
 									<!-- FORMULARIO MODAL-->
-									<div class="form-group row">
-										<label class="col-md-4" for="activonombre">Nombre:</label>
-										<input type="hidden" th:field="*{idactivo}" id="idactivo"name="idactivo">
-										<input type="text" th:field="*{nombre}" id="activonombre" class="form-control form-control-sm col-md-7 shadow" name="activonombre" required>
-										<small class="invalid-feedback col-md-8">Agregue un activo!</small>
+									<div class="form-row">	
+										<div class="form-group col-md-6"><img class="imagenmodalsave" th:src="@{/images/logosecretaria.png}" />	 </div>
 									</div>
 									<div class="form-group row">
-										<labelclass="col-md-4" for="activotipo">Tipo:</label>
+										<label class="col-md-3" for="activotipo">Categoría del bien/servicio:</label>
 										<select th:field="*{idtipo}"class="custom-select custom-select-sm form-control form-control-sm col-md-7 shadow"  name="activotipo" id="activotipo" required >
-											<option selected disabled value="">Seleccionar tipo...</option>
+											<option selected disabled value="">Seleccionar categoría...</option>
 											<option th:each="tipo:${listatipos}" th:value="${tipo.idtipo}" th:text="${tipo.nombre}"></option>
 										</select>
-										<small class="invalid-feedback col-md-8">Seelccione un tipo!</small>
+										<small class="invalid-feedback col-md-7">Seleccione la categoría del bien/servicio!</small>
 									</div>
 									<div class="form-group row">
-										<label class="col-md-4" for="descripcion">Descripcion:</label>
-										<input type="text" th:field="*{descripcion}" id="descripcion" class="form-control form-control-sm col-md-7 shadow" name="descripcion" required>
-										<small class="invalid-feedback col-md-8">Agregue una descipción!</small>
+										<label class="col-md-3" for="activonombre">Bien o Servicio:</label>
+										<input type="hidden" th:field="*{idactivo}" id="idactivo"name="idactivo">
+										<input type="text" th:field="*{nombre}" id="activonombre" class="form-control form-control-sm col-md-7 shadow" 
+										 placeholder="Ej.Computadora, Luz eléctrica" spellcheck = "true" autocomplete="off" name="activonombre" minlength="2" maxlength="30" required>
+										<small class="invalid-feedback col-md-7">Agregue el nombre del bien/servicio!</small>
+									</div>
+									<div class="form-group row">
+										<label class="col-md-3" for="descripcion1">Descripcion:</label>
+										<textarea type="text" th:field="*{descripcion}" id="descripcion" class="form-control form-control-sm col-md-7 shadow" name="descripcion" 
+										 placeholder="Ej.Computadora de escritorio" autocomplete="off" 
+													contenteditable = "true" spellcheck = "true" minlength="2" maxlength="35" required></textarea>
+										<small class="invalid-feedback col-md-7">Ingrese una pequeña descripción del bien o servicio!</small>
 									</div>
 									
 									<div class="modal-footer bg-info">

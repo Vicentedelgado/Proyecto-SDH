@@ -6,7 +6,7 @@
 </head>
 <body class="body1">
 	<header th:replace="plantilla/template :: header"></header>
-	<main class="main col-md-9 ml-sm-auto col-lg-10 px-md-4">
+	<main class="main col-md-20 ml-sm-auto col-lg-10 px-md-4">
 		<div class="container">
 			<h1 th:text="${titulo}"></h1>
 			<h5 th:text="${titulo0}"></h5>
@@ -14,7 +14,7 @@
 		<!--  BOTONES-->
 		<div id="botones" class="container" >
 			<!-- Button modal -->
-			<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-info btn-sm rounded-pill text-white shadow" data-toggle="modal" data-target="#saveModal"
+			<a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')" class="btn btn-info btn-sm rounded-pill text-white shadow" data-toggle="modal" data-target="#saveModal"
 				th:text="'Nuevo registro'" title="Crear nuevo registro de un funcionario"></a>
 			
 			  <a class="btn btn-primary btn-sm rounded-pill text-white shadow" data-toggle="collapse" href="#filtrarhhrrspi" role="button" aria-expanded="false" aria-controls="collapseExample"
@@ -96,7 +96,7 @@
 									<thead class="thead bg-info text-white">
 										<tr>
 											<th class="ocultarcolunma" scope="col">ID</th>
-											<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">EDITAR</th>
+											<th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">EDITAR</th>
 											<th scope="col">Nombres</th>
 											<th scope="col">Apellidos</th>
 											<th scope="col">Cédula</th>
@@ -113,7 +113,7 @@
 									<tbody class="tbody">
 										<tr th:each="item:${listarrhh1}">
 											<th class="ocultarcolunma" scope="row" th:text="${item.idusuario}"></th>
-											<td sec:authorize="hasRole('ROLE_ADMIN')">
+											<td sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">
 												<div align="center">
 													<a th:href="@{edit/(idusuario=${item.idusuario})}" class="editModal3 shadow" title="Editar" target="black">
 														<svg width="1.3em" height="1.3em" viewBox="0 0 16 16"class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -166,7 +166,7 @@
 									<thead class="thead bg-info text-white">
 										<tr>
 											<th class="ocultarcolunma" scope="col">ID</th>
-											<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">EDITAR</th>
+											<th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">EDITAR</th>
 											<th scope="col">Nombres</th>
 											<th scope="col">Apellidos</th>
 											<th scope="col">Cédula</th>
@@ -183,7 +183,7 @@
 									<tbody class="tbody">
 										<tr th:each="item:${listarrhh2}">
 											<th class="ocultarcolunma" scope="row"th:text="${item.idusuario}"></th>
-											<td sec:authorize="hasRole('ROLE_ADMIN')">
+											<td sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">
 												<div align="center">
 													<a th:href="@{edit/(idusuario=${item.idusuario})}"
 														class="editModal3 shadow" title="Editar" target="black">
@@ -237,7 +237,7 @@
 									<thead class="thead bg-info text-white">
 										<tr>
 											<th class="ocultarcolunma" scope="col">ID</th>
-											<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">EDITAR</th>
+											<th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">EDITAR</th>
 											<th scope="col">Nombres</th>
 											<th scope="col">Apellidos</th>
 											<th scope="col">Cédula</th>
@@ -254,7 +254,7 @@
 									<tbody class="tbody">
 										<tr th:each="item:${listarrhh3}">
 											<th class="ocultarcolunma" scope="row" th:text="${item.idusuario}"></th>
-											<td sec:authorize="hasRole('ROLE_ADMIN')">
+											<td sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">
 												<div align="center">
 													<a th:href="@{edit/(idusuario=${item.idusuario})}" class="editModal3 shadow" title="Editar" target="black">
 														<svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -307,7 +307,7 @@
 									<thead class="thead bg-info text-white">
 										<tr>
 											<th class="ocultarcolunma" scope="col">ID</th>
-											<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">EDITAR</th>
+											<th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">EDITAR</th>
 											<th scope="col">Nombres</th>
 											<th scope="col">Apellidos</th>
 											<th scope="col">Cédula</th>
@@ -324,7 +324,7 @@
 									<tbody class="tbody">
 										<tr th:each="item:${listarrhh4}">
 											<th class="ocultarcolunma" scope="row" th:text="${item.idusuario}"></th>
-											<td sec:authorize="hasRole('ROLE_ADMIN')">
+											<td sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">
 												<div align="center">
 													<a th:href="@{edit/(idusuario=${item.idusuario})}" class="editModal3 shadow" title="Editar" target="black">
 														<svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -377,7 +377,7 @@
 									<thead class="thead bg-info text-white">
 										<tr>
 											<th class="ocultarcolunma" scope="col">ID</th>
-											<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">EDITAR</th>
+											<th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">EDITAR</th>
 											<th scope="col">Nombres</th>
 											<th scope="col">Apellidos</th>
 											<th scope="col">Cédula</th>
@@ -394,7 +394,7 @@
 									<tbody class="tbody">
 										<tr th:each="item:${listarrhh5}">
 											<th class="ocultarcolunma" scope="row" th:text="${item.idusuario}"></th>
-											<td sec:authorize="hasRole('ROLE_ADMIN')">
+											<td sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">
 												<div align="center">
 													<a th:href="@{edit/(idusuario=${item.idusuario})}" class="editModal3 shadow" title="Editar" target="black">
 														<svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -447,7 +447,7 @@
 									<thead class="thead bg-info text-white">
 										<tr>
 											<th class="ocultarcolunma" scope="col">ID</th>
-											<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">EDITAR</th>
+											<th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">EDITAR</th>
 											<th scope="col">Nombres</th>
 											<th scope="col">Apellidos</th>
 											<th scope="col">Cédula</th>
@@ -464,7 +464,7 @@
 									<tbody class="tbody">
 										<tr th:each="item:${listarrhh6}">
 											<th class="ocultarcolunma" scope="row" th:text="${item.idusuario}"></th>
-											<td sec:authorize="hasRole('ROLE_ADMIN')">
+											<td sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">
 												<div align="center">
 													<a th:href="@{edit/(idusuario=${item.idusuario})}" class="editModal3 shadow" title="Editar" target="black">
 														<svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -517,7 +517,7 @@
 									<thead class="thead bg-info text-white">
 										<tr>
 											<th class="ocultarcolunma" scope="col">ID</th>
-											<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">EDITAR</th>
+											<th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">EDITAR</th>
 											<th scope="col">Nombres</th>
 											<th scope="col">Apellidos</th>
 											<th scope="col">Cédula</th>
@@ -534,7 +534,7 @@
 									<tbody class="tbody">
 										<tr th:each="item:${listarrhh7}">
 											<th class="ocultarcolunma" scope="row" th:text="${item.idusuario}"></th>
-											<td sec:authorize="hasRole('ROLE_ADMIN')">
+											<td sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">
 												<div align="center">
 													<a th:href="@{edit/(idusuario=${item.idusuario})}" class="editModal3 shadow" title="Editar" target="black">
 														<svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -587,7 +587,7 @@
 									<thead class="thead bg-info text-white">
 										<tr>
 											<th class="ocultarcolunma" scope="col">ID</th>
-											<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">EDITAR</th>
+											<th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">EDITAR</th>
 											<th scope="col">Nombres</th>
 											<th scope="col">Apellidos</th>
 											<th scope="col">Cédula</th>
@@ -604,7 +604,7 @@
 									<tbody class="tbody">
 										<tr th:each="item:${listarrhh8}">
 											<th class="ocultarcolunma" scope="row" th:text="${item.idusuario}"></th>
-											<td sec:authorize="hasRole('ROLE_ADMIN')">
+											<td sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">
 												<div align="center">
 													<a th:href="@{edit/(idusuario=${item.idusuario})}" class="editModal3 shadow" title="Editar" target="black">
 														<svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -657,7 +657,7 @@
 									<thead class="thead bg-info text-white">
 										<tr>
 											<th class="ocultarcolunma" scope="col">ID</th>
-											<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">EDITAR</th>
+											<th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">EDITAR</th>
 											<th scope="col">Nombres</th>
 											<th scope="col">Apellidos</th>
 											<th scope="col">Cédula</th>
@@ -674,7 +674,7 @@
 									<tbody class="tbody">
 										<tr th:each="item:${listarrhh9}">
 											<th class="ocultarcolunma" scope="row" th:text="${item.idusuario}"></th>
-											<td sec:authorize="hasRole('ROLE_ADMIN')">
+											<td sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">
 												<div align="center">
 													<a th:href="@{edit/(idusuario=${item.idusuario})}" class="editModal3 shadow" title="Editar" target="black">
 														<svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

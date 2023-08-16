@@ -30,6 +30,8 @@ public interface RegistroDelSpiRepository extends CrudRepository<RegistrodelSpi,
 	public List<RegistrodelSpi> Buscaregistroinstitucion(Long idinstitucion);
 	@Query("SELECT u FROM RegistrodelSpi u WHERE u.idactivo.idtipo.idtipo=:idtipo")
 	public List<RegistrodelSpi> Buscaregistrotipo(Long idtipo);
+	@Query("SELECT u FROM RegistrodelSpi u WHERE u.idactivo.idactivo=:idactivo")
+	public List<RegistrodelSpi> BuscarporActivo(Long idactivo);
 	
 	public RegistrodelSpi findByArchivo(String archivo);
 	

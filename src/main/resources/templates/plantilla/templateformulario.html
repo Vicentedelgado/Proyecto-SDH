@@ -20,6 +20,12 @@
 
 		<nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-top shadow-lg" >
 			<div class="container-fluid">
+				<button class="navbar-toggler position-relative d-lg-none" type="button" data-toggle="collapse"
+					data-target="#sidebarMenu"
+					aria-controls="sidebarMenu" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 				<a class="navbar-brand" th:href="@{/}"><strong><img class="imagenlogo" th:src="@{/images/sdh.png}" /></strong> </a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
@@ -57,7 +63,7 @@
 			</div>
 		</nav>
 		<!-- SIDEBAR -->
-		<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-info sidebar collapse">
+		<nav id="sidebarMenu" class="col-sm-6 col-md-4 col-lg-2 d-lg-block bg-info collapse navbar-collapse sidebar " aria-label="breadcrumb">
 	      <div class="sidebar-sticky pt-3">
 	        <ul class="nav flex-column">
 	          <li sec:authorize="isAuthenticated()" class="nav-item" aria-label="breadcrumb">
@@ -96,7 +102,7 @@
 				  </a>
 			  </li>
 	        </ul>
-	        <ul class="nav flex-column" sec:authorize="hasRole('ROLE_ADMIN')" >
+	        <ul class="nav flex-column" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')" >
 				<li class="nav-item" aria-label="breadcrumb">
 				  <a class="nav-link text-white-50" type="button"data-toggle="collapse" data-target="#botonadministrador" aria-expanded="false" aria-controls="collapseExample">
 					    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-stars" viewBox="0 0 16 16">
@@ -107,11 +113,11 @@
 				  </a>
 				  <div class="collapse" id="botonadministrador">
 					  <div class="card card-body bg-info border-0">
-					    <a class="dropdown-item text-white-50" th:href="@{/views/DataSpi/Admin/usuarios}">Registro de Usuario</a>
-					    <!--<a class="dropdown-item text-white-50" th:href="@{/views/DataSpi/Admin/zonas}">Zonas</a>-->
+					    <a class="dropdown-item text-white-50" th:href="@{/views/DataSpi/Admin/usuarios}" sec:authorize="hasRole('ROLE_ADMIN')">Registro de Usuario</a>
+					    <a class="dropdown-item text-white-50" th:href="@{/views/DataSpi/Admin/zonas}"sec:authorize="hasRole('ROLE_ADMIN')">Zonas</a>
 					    <a class="dropdown-item text-white-50" th:href="@{/views/DataSpi/Admin/instituciones}">Institución</a>
-					    <!--<a class="dropdown-item text-white-50" th:href="@{/views/DataSpi/Admin/activos}">Activos</a>-->
-					    <!--<a class="dropdown-item text-white-50" th:href="@{/views/DataSpi/Admin/tipos}">Categorías</a>-->
+					    <a class="dropdown-item text-white-50" th:href="@{/views/DataSpi/Admin/activos}"sec:authorize="hasRole('ROLE_ADMIN')">Bienes/Servicios</a>
+					    <a class="dropdown-item text-white-50" th:href="@{/views/DataSpi/Admin/tipos}" sec:authorize="hasRole('ROLE_ADMIN')">Categorías</a>
 					    <a class="dropdown-item text-white-50" th:href="@{/views/DataSpi/Admin/unidades}">Unidades</a>
 					    <!--<a class="dropdown-item text-white-50" th:href="@{/views/DataSpi/Admin/modalidades}">Modalidades</a>-->
 					  </div>

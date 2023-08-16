@@ -24,5 +24,6 @@ public interface IRegistroDelSpiService {
 	public List<RegistrodelSpi> Listaregistrodelspiconectividad(SpiDatos idspi);
 	public List<RegistrodelSpi> Buscaregistroinstitucion(Long idinstitucion);
 	public List<RegistrodelSpi> Buscaregistrotipo(Long idtipo);
+	public List<RegistrodelSpi> BuscarporActivo(Long idactivo);
 
 }

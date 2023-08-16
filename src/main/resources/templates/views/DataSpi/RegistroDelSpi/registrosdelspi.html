@@ -6,7 +6,7 @@
 </head>
 <body class="body1">
 	<header th:replace="plantilla/template :: header"></header>
-	<main class="main col-md-9 ml-sm-auto col-lg-10 px-md-4">
+	<main class="main col-md-20 ml-sm-auto col-lg-10 px-md-4">
 		<div class="container">
 			<h1 th:text="${titulo}"></h1>
 			<h5 th:text="${titulo0}"></h5>	
@@ -14,7 +14,7 @@
 		<!--  BOTONES-->
 		<div id="botones" class="container">
 			<!-- Button modal -->
-			<a  sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-info btn-sm rounded-pill text-white shadow"
+			<a  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')" class="btn btn-info btn-sm rounded-pill text-white shadow"
 				data-toggle="modal" data-target="#saveModal"
 				th:text="'Crear nuevo registro'" title="Crear nuevo registro de bien/servicio para un SPI">
 			</a>
@@ -33,14 +33,14 @@
 				</svg>
 			</a>
 			<!-- Button nueva institucion --> 
-			<a sec:authorize="hasRole('ROLE_ADMIN')" href="@{}" class="float-right" data-toggle="modal" data-target="#saveModalInstitucion" title="Agregar una institución a la lista" target="black">
+			<a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')" href="@{}" class="float-right" data-toggle="modal" data-target="#saveModalInstitucion" title="Agregar una institución a la lista" target="black">
 				<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" fill="currentColor" class="bi bi-file-earmark-plus text-info" viewBox="0 0 16 16">
 				  <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z"/>
 				  <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
 				</svg>
 			</a>
 			<!-- Button nuevo activo -->  
-			<a sec:authorize="hasRole('ROLE_ADMIN')" href="@{}" class="float-right" data-toggle="modal" data-target="#saveModalActivo" title="Agregar un bien/servicio a la lista" target="black">
+			<a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')" href="@{}" class="float-right" data-toggle="modal" data-target="#saveModalActivo" title="Agregar un bien/servicio a la lista" target="black">
 				<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" fill="currentColor" class="bi bi-journal-plus" viewBox="0 0 16 16">
 				  <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z"/>
 				  <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
@@ -57,7 +57,7 @@
 						<tr>
 							<th class="ocultarcolunma" scope="col">ID</th>
 							<th scope="col">DETALLE</th>
-							<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">EDITAR</th>
+							<th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">EDITAR</th>
 							<th scope="col">Bien/Servicio</th>
 							<th scope="col">Zona</th>
 							<th scope="col">SPI</th>
@@ -84,7 +84,7 @@
 									</a> 		
 								</div>
 							</td>
-							<td sec:authorize="hasRole('ROLE_ADMIN')">
+							<td sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">
 								<div align="center">
 									<a th:href="@{edit/(idregistro=${item.idregistro})}" class=" editModal2 shadow" title="Editar" target="black">
 										<svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

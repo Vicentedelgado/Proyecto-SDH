@@ -45,7 +45,7 @@ public class RRHHController {
 	@Autowired
 	private IModalidadService IModalidadService;
 	
-	@Secured({"ROLE_ADMIN", "ROLE_VISITOR"})
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND","ROLE_VISITOR"})
 	@RequestMapping("/")
 	public String listarRRHH(Model model,@ModelAttribute("idzona") Zona idzona) {
 		List<RRHH> listarrhh=IRRHHService.listarrrhh();
@@ -90,7 +90,7 @@ public class RRHHController {
 	}
 	
 	//FILTRAR PARA IMPRIMIR RRHH POR ZONA
-	@Secured({"ROLE_ADMIN", "ROLE_VISITOR"})
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND","ROLE_VISITOR"})
 	@RequestMapping(value="/listaporzona/{idzona}", method=RequestMethod.GET)
 	public String listarRRHHPorZona(@PathVariable("idzona") Zona idzona, Model model) {
 		List<RRHH> listazonarrhh=IRRHHService.Listaporzonarrhh(idzona);
@@ -103,7 +103,7 @@ public class RRHHController {
 	}
 	
 	//FILTRAR PARA IMPRIMIR RRHH POR SPI 
-	@Secured({"ROLE_ADMIN", "ROLE_VISITOR"})
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND","ROLE_VISITOR"})
 	@RequestMapping(value="/listaporspi/{idspi}", method=RequestMethod.GET)
 	public String listarRRHHPorSpi(@PathVariable("idspi") SpiDatos idspi, Model model,@ModelAttribute("idzona") Zona idzona,RedirectAttributes alerta) {
 		List<RRHH> listaspirrhh=IRRHHService.Listaporspirrhh(idspi);
@@ -169,7 +169,7 @@ public class RRHHController {
 	}
 	
 	//GUARDAR
-	@Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@PostMapping("/save")
 	public String guardar(@Valid @ModelAttribute RRHH rrhh, BindingResult result, RedirectAttributes alerta) {
 		List<RRHH> listaporcedularrhh=IRRHHService.Listaporcedularrhh(rrhh.getCedula());
@@ -189,7 +189,7 @@ public class RRHHController {
 	}
 	
 	//GUARDAR
-	@Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@PostMapping("listaporspi/save")
 	public String guardarporspi(@Valid @ModelAttribute RRHH rrhh, BindingResult result, RedirectAttributes alerta) {
 		Long spi = rrhh.getIdspi().getIdspi();
@@ -211,7 +211,7 @@ public class RRHHController {
 	}
 	
 	//EDITAR MODAL
-	@Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@GetMapping("/edit")
 	@ResponseBody
 	public RRHH editar(Long idusuario) {
@@ -219,7 +219,7 @@ public class RRHHController {
 	}
 	
 	//EDITAR MODAL
-	@Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@GetMapping("listaporspi/edit")
 	@ResponseBody
 	public RRHH editarporspi(Long idusuario) {
@@ -227,7 +227,7 @@ public class RRHHController {
 	}
 	
 	//ELEGIR SPI POR ZONA (FILTRAR)
-	@Secured({"ROLE_ADMIN", "ROLE_VISITOR"})
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND","ROLE_VISITOR"})
 	@RequestMapping(value="/Elegirspi",method = RequestMethod.GET)
 	public @ResponseBody List<SpiDatos> BuscarporZona(@RequestParam(value ="idzona", required = true) Zona idzona){
 		return ISpiDatosService.FindByZona(idzona); 

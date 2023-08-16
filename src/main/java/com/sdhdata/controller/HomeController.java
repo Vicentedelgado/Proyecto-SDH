@@ -3,6 +3,7 @@ package com.sdhdata.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +27,7 @@ public class HomeController {
 	@Autowired
 	private ISpiDatosService ISpiDatosService;
 	
-	
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND","ROLE_VISITOR"})
 	@GetMapping("/")
 	//@RequestMapping({"/home","/index","/"})
 	@RequestMapping(method=RequestMethod.GET)
@@ -39,6 +40,7 @@ public class HomeController {
 	}
 	
 	//ELEGIR SPI POR ZONA (FILTRAR)
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND","ROLE_VISITOR"})
 	@RequestMapping(value="/Elegirspi",method = RequestMethod.GET)
 	public @ResponseBody List<SpiDatos> BuscarporZona(@RequestParam(value ="idzona", required = true) Zona idzona){
 		return ISpiDatosService.FindByZona(idzona); 

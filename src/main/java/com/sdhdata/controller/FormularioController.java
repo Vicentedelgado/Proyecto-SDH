@@ -72,7 +72,7 @@ public class FormularioController {
 	  //SERVIDOR
 		//private String RutaGuardarArchivos = "/opt//DATASDH//DATASPI//VerificableBienes";
 	//////////////////////
-  	@Secured({"ROLE_ADMIN", "ROLE_VISITOR"})	
+  	@Secured({"ROLE_ADMIN", "ROLE_ATTEND","ROLE_VISITOR"})	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String inicio(Model model, @ModelAttribute("idzona") Zona idzona, @ModelAttribute("idspi") SpiDatos idspi, @ModelAttribute("idtipo") Tipo idtipo) {
 		//títulos cards
@@ -198,21 +198,21 @@ public class FormularioController {
 	}
 	
 	//ELEGIR SPI POR ZONA (FILTRAR)
-  	@Secured({"ROLE_ADMIN", "ROLE_VISITOR"})
+  	@Secured({"ROLE_ADMIN", "ROLE_ATTEND","ROLE_VISITOR"})
 	@RequestMapping(value="/Elegirspi",method = RequestMethod.GET)
 	public @ResponseBody List<SpiDatos> BuscarporZona(@RequestParam(value ="idzona", required = true) Zona idzona){
 		return ISpiDatosService.FindByZona(idzona); 
 	}
 	
 	//ELEGIR ACTIVO POR TIPO (FILTRAR)
-	@Secured("ROLE_ADMIN")
+  	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@RequestMapping(value="/Elegiractivo",method = RequestMethod.GET)
 	public @ResponseBody List<Activo> BuscarporTipo(@RequestParam(value ="idtipo", required = true) Tipo idtipo){
 		return IActivoService.Buscarportipo(idtipo); 
 	}
 	
 	//GUARDAR
-	@Secured("ROLE_ADMIN")
+  	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@PostMapping("listaporspi/save")
 	public String guardar(@Valid @ModelAttribute RegistrodelSpi registrodelspi, BindingResult result, Model model,
 			@RequestParam("file") MultipartFile archivo, RedirectAttributes alerta) {
@@ -256,7 +256,7 @@ public class FormularioController {
 	}
 	
 	//GUARDAR EDITAR
-	@Secured("ROLE_ADMIN")
+  	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@PostMapping("/saveedit")
 	public String guardaredit(@Valid @ModelAttribute("registrodelspi") RegistrodelSpi registrodelspi, BindingResult result, Model model, 
 			@RequestParam("file") MultipartFile archivo, RedirectAttributes alerta) {
@@ -307,7 +307,7 @@ public class FormularioController {
 	}
 	
 	//GUARDAR RRHH
-	@Secured("ROLE_ADMIN")
+  	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@PostMapping("/listaporspi/saverrhh")
 	public String guardarrrhh(@Valid @ModelAttribute RRHH rrhh, BindingResult result, RedirectAttributes alerta) {
 		Long spi=rrhh.getIdspi().getIdspi();
@@ -328,7 +328,7 @@ public class FormularioController {
 	}
 	
 	//EDITAR MODAL
-	@Secured("ROLE_ADMIN")
+  	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@GetMapping("listaporspi/edit/")
 	@ResponseBody
 	public RegistrodelSpi editar( Long idregistro) {
@@ -339,7 +339,7 @@ public class FormularioController {
 	}
 	
 	//EDITAR MODAL RRHH
-	@Secured("ROLE_ADMIN")
+  	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@GetMapping("listaporspi/editrrhh")
 	@ResponseBody
 	public RRHH editarrrhh(Long idusuario) {
@@ -347,7 +347,7 @@ public class FormularioController {
 	}
 	
 	//EDITAR Y DETALLE
-	@Secured({"ROLE_ADMIN", "ROLE_VISITOR"})
+  	@Secured({"ROLE_ADMIN", "ROLE_ATTEND","ROLE_VISITOR"})
 	@GetMapping("/spidetl/{idregistro}")
 	public String Verdetalle(@PathVariable("idregistro") Long idregistro, Model model, RedirectAttributes attribute) { 
 		List<Institucion> listainstitucion=IInstitucionService.listainstitucion();
@@ -374,7 +374,7 @@ public class FormularioController {
 	}
 	
 	//GUARDAR ACTIVO
-	@Secured("ROLE_ADMIN")
+  	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@PostMapping("listaporspi/saveactivo")
 	public String guardaractivo(@Valid @ModelAttribute RegistrodelSpi registrodelspi,@ModelAttribute Activo Activo, BindingResult result,
 			RedirectAttributes alerta) {
@@ -394,7 +394,7 @@ public class FormularioController {
 	}
 	
 	//GUARDAR INSTITUCION
-	@Secured("ROLE_ADMIN")
+  	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@PostMapping("listaporspi/saveinstitucion")
 	public String guardarinstitucion(@Valid @ModelAttribute RegistrodelSpi registrodelspi,@ModelAttribute Institucion institucion, BindingResult result,
 			RedirectAttributes alerta) {

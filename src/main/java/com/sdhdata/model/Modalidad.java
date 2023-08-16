@@ -38,6 +38,20 @@ public class Modalidad implements Serializable{
 	public String toString() {
 		return "Modalidad [idmodalidad=" + idmodalidad + ", nombre=" + nombre + "]";
 	}
+	public Modalidad() {
+		super();
+	}
+	public Modalidad(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
+	public Modalidad(Long idmodalidad, String nombre) {
+		super();
+		this.idmodalidad = idmodalidad;
+		this.nombre = nombre;
+	}
+	
+	
 	
 	
 

@@ -67,6 +67,7 @@ public class AdminController {
 	@Autowired
 	private IRRHHService IRRHHService;
 	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/")
 	public String AdminPage (Model model) {
 		List<Zona> listazonas = IZonaService.listazona();
@@ -100,6 +101,7 @@ public class AdminController {
 		return "/views/DataSpi/Admin/admin";
 	}
 	
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@GetMapping("/usuarios")
 	public String AdminPageususrios (Model model) {
 		List<Users> listausuarios= IUsersService.listausuarios();
@@ -115,7 +117,7 @@ public class AdminController {
 		return "/views/DataSpi/Admin/user";
 	}
 	
-	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/zonas")
 	public String AdminPagezonas (Model model) {
 		List<Zona> listazonas = IZonaService.listazona();
@@ -123,11 +125,13 @@ public class AdminController {
 		Zona zona = new Zona();
 		//VENTANA
 		model.addAttribute("titulo","Página: Zonas de la SDH");
+		model.addAttribute("titulo0","Muestra una lista de las zonas");
 		model.addAttribute("listazonas",listazonas);
 		model.addAttribute("zona",zona);
 		return "/views/DataSpi/Admin/zona";
 	}
 	
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@GetMapping("/instituciones")
 	public String AdminPageinstituciones (Model model) {
 		List<Institucion> listainstituciones = IInstitucionService.listainstitucion();	
@@ -135,12 +139,13 @@ public class AdminController {
 		Institucion institucion = new Institucion();
 		//VENTANA
 		model.addAttribute("titulo","Página: Instituciones de la SDH");
-		model.addAttribute("titulo0","Página: Unidades de la SDH");
+		model.addAttribute("titulo0","Muestra una lista de las instituciones de la SDH");
 		model.addAttribute("listainstituciones",listainstituciones);
 		model.addAttribute("institucion",institucion);
 		return "/views/DataSpi/Admin/institucion";
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/activos")
 	public String AdminPageactivos (Model model) {		
 		List<Activo> listaactivos = IActivoService.listaactivo();
@@ -156,6 +161,7 @@ public class AdminController {
 		return "/views/DataSpi/Admin/activo";
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/tipos")
 	public String AdminPagetipos (Model model) {
 		
@@ -173,6 +179,7 @@ public class AdminController {
 		return "/views/DataSpi/Admin/tipo";
 	}
 	
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@GetMapping("/unidades")
 	public String AdminPageunidaddes (Model model) {
 		List<Unidad> listaunidad = IUnidadService.listaunidad();	
@@ -188,7 +195,7 @@ public class AdminController {
 	
 	
 	//EDITAR MODAL Usuario
-	@Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@GetMapping("/edituser")
 	@ResponseBody
 	public Users editaruser(Long iduser) {
@@ -213,7 +220,7 @@ public class AdminController {
 	}
 	
 	//EDITAR MODAL Institucion
-	@Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@GetMapping("/editinstitucion")
 	@ResponseBody
 	public Institucion editarinstitucion(Long idinstitucion) {
@@ -237,7 +244,7 @@ public class AdminController {
 	}
 	
 	//EDITAR MODAL Unidad
-	@Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@GetMapping("/editunidad")
 	@ResponseBody
 	public Unidad editarunidad(Long idunidad) {
@@ -253,7 +260,7 @@ public class AdminController {
 	}
 	
 	//GUARDAR
-	@Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@PostMapping("/saveuser")
 	public String guardarusuarios(@Valid @ModelAttribute Users users, BindingResult result, RedirectAttributes alerta) {
 		List<Users> listaporusuario= IUsersService.filtrarporusuario(users.getUsername());
@@ -313,7 +320,7 @@ public class AdminController {
 	}
 	
 	//GUARDAR
-	@Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@PostMapping("/saveinstitucion")
 	public String guardarinstitucion(@Valid @ModelAttribute Institucion institucion, BindingResult result, RedirectAttributes alerta) {
 		List<Institucion> listainsnombre = IInstitucionService.listainsnombre(institucion.getNombre());
@@ -382,7 +389,7 @@ public class AdminController {
 	}
 	
 	//GUARDAR
-	@Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@PostMapping("/saveunidad")
 	public String guardarunidad(@Valid @ModelAttribute Unidad unidad, BindingResult result, RedirectAttributes alerta) {
 		List<Unidad> listaunidad = IUnidadService.listauninombre(unidad.getNombre());
@@ -417,7 +424,7 @@ public class AdminController {
 		return "redirect:/views/DataSpi/Admin/";
 	}
 	//Eliminar
-	@Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@GetMapping("/deleteuser/{iduser}")
 	public String deleteuser(@PathVariable("iduser") Long iduser, RedirectAttributes alerta) {
 		Users User = null;
@@ -468,6 +475,7 @@ public class AdminController {
 	@GetMapping("/deletezona/{idzona}")
 	public String deletezona(@PathVariable("idzona") Long idzona, RedirectAttributes alerta) {
 		Zona Zon = null;
+		List<SpiDatos> spidatos = ISpiDatosService.BuscarporZona(idzona);
 		if(idzona > 0) {
 			Zon = IZonaService.buscarPorId(idzona);
 			if(Zon == null) {
@@ -480,6 +488,14 @@ public class AdminController {
 			alerta.addFlashAttribute("warning", "NO EXISTE ESTA ZONA");
 			return "redirect:/views/DataSpi/Admin/zonas";
 		}
+		if(spidatos.size()>=1) {
+			System.out.print("NO SE PUEDE ELIMINAR PORQUE: "+ Zon.getNombre()+
+					" está siendo usada en un SPI");
+			alerta.addFlashAttribute("error", "NO SE PUEDE ELIMINAR PORQUE: "+ Zon.getNombre()+
+					" está siendo usada en un SPI");
+			return "redirect:/views/DataSpi/Admin/zonas";
+			
+		}
 		
 		IZonaService.eliminar(idzona);
 		System.out.print("REGISTRO ELIMINADO CON ÉXITO");
@@ -488,7 +504,7 @@ public class AdminController {
 	}
 	
 	//Eliminar
-	@Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@GetMapping("/deleteinstitucion/{idinstitucion}")
 	public String deleteinstitucion(@PathVariable("idinstitucion") Long idinstitucion, RedirectAttributes alerta) {
 		Institucion Ins = null;
@@ -523,9 +539,31 @@ public class AdminController {
 	}
 	
 	//Eliminar
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/deleteactivo/{idactivo}")
 	public String deleteactivo(@PathVariable("idactivo") Long idactivo, RedirectAttributes alerta) {
-		
+		Activo Act = null;
+		List<RegistrodelSpi> registrospi = IRegistroDelSpiService.BuscarporActivo(idactivo);
+		if(idactivo > 0) {
+			Act = IActivoService.buscarPorId(idactivo);
+			if(Act == null) {
+				System.out.print("Error: La zona no existe");
+				alerta.addFlashAttribute("warning", "NO EXISTE ESTA ZONA");
+				return "redirect:/views/DataSpi/Admin/activos";
+			}
+		}else {
+			System.out.print("Error: La zona no existe");
+			alerta.addFlashAttribute("warning", "NO EXISTE ESTA ZONA");
+			return "redirect:/views/DataSpi/Admin/activos";
+		}
+		if(registrospi.size()>=1) {
+			System.out.print("NO SE PUEDE ELIMINAR PORQUE: "+ Act.getNombre()+
+					" está siendo usada en un registro del SPI");
+			alerta.addFlashAttribute("error", "NO SE PUEDE ELIMINAR PORQUE: "+ Act.getNombre()+
+					" está siendo usada en un registro del SPI");
+			return "redirect:/views/DataSpi/Admin/activos";
+			
+		}
 		
 		IActivoService.eliminar(idactivo);
 		System.out.print("REGISTRO ELIMINADO CON ÉXITO");
@@ -546,7 +584,7 @@ public class AdminController {
 	}
 	
 	//Eliminar
-	@Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@GetMapping("/deleteunidad/{idunidad}")
 	public String deleteunidad(@PathVariable("idunidad") Long idunidad, RedirectAttributes alerta) {
 		Unidad Uni = null;

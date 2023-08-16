@@ -133,6 +133,43 @@ public class RRHH implements Serializable{
 		this.estado = estado;
 	}
 	
+	
+	
+	public RRHH() {
+		super();
+	}
+	
+	public RRHH(SpiDatos idspi, Zona idzona, Unidad idunidad, Modalidad idmodalidad, @NotEmpty String cargo,
+			@NotEmpty String nombres, @NotEmpty String apellidos, @NotEmpty String cedula, @NotEmpty String telefono,
+			@NotEmpty @Email String email, @NotEmpty String direccion, @NotEmpty String estado) {
+		super();
+		this.idspi = idspi;
+		this.idzona = idzona;
+		this.idunidad = idunidad;
+		this.idmodalidad = idmodalidad;
+		this.cargo = cargo;
+		this.nombres = nombres;
+		this.apellidos = apellidos;
+		this.cedula = cedula;
+		this.telefono = telefono;
+		this.email = email;
+		this.direccion = direccion;
+		this.estado = estado;
+	}
+	
+	public RRHH(@NotEmpty String cargo, @NotEmpty String nombres, @NotEmpty String apellidos, @NotEmpty String cedula,
+			@NotEmpty String telefono, @NotEmpty @Email String email, @NotEmpty String direccion,
+			@NotEmpty String estado) {
+		super();
+		this.cargo = cargo;
+		this.nombres = nombres;
+		this.apellidos = apellidos;
+		this.cedula = cedula;
+		this.telefono = telefono;
+		this.email = email;
+		this.direccion = direccion;
+		this.estado = estado;
+	}
 	@Override
 	public String toString() {
 		return "RRHH [idusuario=" + idusuario + ", idspi=" + idspi + ", idzona=" + idzona + ", idunidad=" + idunidad

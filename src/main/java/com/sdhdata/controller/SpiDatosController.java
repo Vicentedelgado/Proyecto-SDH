@@ -50,7 +50,7 @@ public class SpiDatosController {
 		//private String RutaGuardarArchivos = "/opt//DATASDH//DATASPI//VerificableSPI";
 	//////////////////////
 	
-    @Secured({"ROLE_ADMIN", "ROLE_VISITOR"})
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND","ROLE_VISITOR"})
     @GetMapping("/")
 	public String listarSpiDatos(Model model) {
 		List<SpiDatos> listaspidatos= ISpiDatosService.listaspidatos();
@@ -71,7 +71,7 @@ public class SpiDatosController {
 	}
 	
 	//GUARDAR
-    @Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@PostMapping("/save")
 	public String guardar(@Valid @ModelAttribute SpiDatos spidatos, BindingResult result, Model model, 
 			@RequestParam("file") MultipartFile archivo, RedirectAttributes alerta) {
@@ -111,7 +111,7 @@ public class SpiDatosController {
 	}
 	
 	//GUARDAR
-    @Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@PostMapping("/saveedit")
 	public String guardaredit(@Valid @ModelAttribute SpiDatos spidatos, BindingResult result, Model model, 
 			@RequestParam("file") MultipartFile archivo, RedirectAttributes alerta) {
@@ -160,7 +160,7 @@ public class SpiDatosController {
 	
 	
 	//EDITAR MODAL
-    @Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@GetMapping("/edit")
 	@ResponseBody
 	public SpiDatos editar(Long idspi) {
@@ -169,7 +169,7 @@ public class SpiDatosController {
 	
 	//EDITAR Y DETALLE
 	
-    @Secured({"ROLE_ADMIN", "ROLE_VISITOR"})
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND","ROLE_VISITOR"})
 	@GetMapping("/spidetl/{idspi}")
   
 	public String Verdetalle(@PathVariable("idspi") Long idspi, Model model, RedirectAttributes attribute) { 

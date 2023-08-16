@@ -25,10 +25,9 @@ public class ActivoTest {
 	@Test
 	@Rollback(false)
 	public void testGuardarActivo() {
-		
-		Long id = (long) 10;
-		Activo idtipo = new Activo();
-		Activo activo = new Activo("Teclado",idtipo.getIdtipo(),"teclado gaming");
+		long id = 3;
+		Tipo tipo = new Tipo(id,"Tecnologia1","Equipos de tecnologia");
+		Activo activo = new Activo("Teclado",tipo,"teclado gaming");
 		Activo activoguardado = repository.save(activo);
 		
 		assertNotNull(activoguardado);
@@ -53,8 +52,9 @@ public class ActivoTest {
    @Rollback(false)
    public void testActualizarActivo() {
 	   String nombreActivo = "Teclado ASUS";
-	   Tipo tipo = new Tipo();
-	   Long id = (long) 10;
+	   long id = 3;
+	   long id0 = 3;
+	   Tipo tipo = new Tipo(id0,"Tecnologia1","Equipos de tecnologia");
 	   Activo activo = new Activo(nombreActivo,tipo,"teclado gaming");
 	   activo.setIdactivo(id);
 	   Activo activoactualizado = repository.findByNombre(nombreActivo);

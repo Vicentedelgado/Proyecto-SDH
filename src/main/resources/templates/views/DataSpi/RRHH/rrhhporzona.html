@@ -6,14 +6,14 @@
 </head>
 <body class="body1">
 	<header th:replace="plantilla/template :: header"></header>
-	<main class="main">
+	<main class="main col-md-20 ml-sm-auto col-lg-10 px-md-4">
 		<div class="container">
 			<h1 th:text="${titulo}"></h1>
 		</div>
 		<!--  BOTONES-->
 		<div id="botones" class="container" th:with="elegirzona=${listazonarrhh[0]}">
 			<!-- Button modal -->
-			<a class="btn btn-info btn-sm rounded-pill text-white shadow" data-toggle="modal" data-target="#saveModal"
+			<a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')" class="btn btn-info btn-sm rounded-pill text-white shadow" data-toggle="modal" data-target="#saveModal"
 				th:text="'Nuevo registro'" title="Crear nuevo registro de un funcionario"></a>
 			<!-- Button excel --> 
 			<a id="excel" class="float-right" th:href="@{/views/DataSpi/RRHH/(format=xlsx)}" title="Generar archivo Excel"> 
@@ -49,7 +49,7 @@
 									<thead class="thead bg-info text-white">
 										<tr>
 											<th class="ocultarcolunma" scope="col">ID</th>
-											<th scope="col">EDITAR</th>
+											<th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">EDITAR</th>
 											<th scope="col">Nombres</th>
 											<th scope="col">Apellidos</th>
 											<th scope="col">Cédula</th>
@@ -65,7 +65,7 @@
 									<tbody class="tbody">
 										<tr th:each="item:${listazonarrhh}">
 											<th class="ocultarcolunma" scope="row" th:text="${item.idusuario}"></th>
-											<td>
+											<td sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_ATTEND')">
 												<div align="center">
 													<a th:href="@{edit/(idusuario=${item.idusuario})}" class="editModal3 shadow" title="Editar" target="black">
 														<svg width="1.3em" height="1.3em" viewBox="0 0 16 16"class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -74,7 +74,7 @@
 														</svg>
 													</a>
 												</div>
-											</td>
+											</td >
 											<td th:text="${item.nombres}"></td>
 											<td th:text="${item.apellidos}"></td>
 											<td th:text="${item.cedula}"></td>

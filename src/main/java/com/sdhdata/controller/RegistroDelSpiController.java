@@ -63,7 +63,7 @@ public class RegistroDelSpiController {
 	//////////////////////
 	
 	//LISTAR
-    @Secured({"ROLE_ADMIN", "ROLE_VISITOR"})
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND","ROLE_VISITOR"})
 	@GetMapping("/")
 	public String listarCantones(Model model,@ModelAttribute("idtipo") Tipo idtipo,@ModelAttribute("idzona") Zona idzona) {
 		List<RegistrodelSpi> listaregistrodelspi=IRegistroDelSpiService.listarregistro();
@@ -99,7 +99,7 @@ public class RegistroDelSpiController {
 	}
 	
 	//CREAR FORMULARIO REGISTRO
-    @Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@GetMapping("/create")
 	public String crear(Model model) {
 		RegistrodelSpi registrodelspi=new RegistrodelSpi();
@@ -115,21 +115,21 @@ public class RegistroDelSpiController {
 	}
 	
 	//ELEGIR ACTIVO POR TIPO (FILTRAR)
-    @Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@RequestMapping(value="/Elegiractivo",method = RequestMethod.GET)
 	public @ResponseBody List<Activo> BuscarporTipo(@RequestParam(value ="idtipo", required = true) Tipo idtipo){
 		return IActivoService.Buscarportipo(idtipo); 
 	}
 	
 	//ELEGIR SPI POR ZONA (FILTRAR)
-    @Secured({"ROLE_ADMIN", "ROLE_VISITOR"})
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND","ROLE_VISITOR"})
 	@RequestMapping(value="/Elegirspi",method = RequestMethod.GET)
 	public @ResponseBody List<SpiDatos> BuscarporZona(@RequestParam(value ="idzona", required = true) Zona idzona){
 		return ISpiDatosService.FindByZona(idzona); 
 	}
 	
 	//GUARDAR
-    @Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@PostMapping("/save")
 	public String guardar(@Valid @ModelAttribute("registrodelspi") RegistrodelSpi registrodelspi, BindingResult result, Model model, 
 			@RequestParam("file") MultipartFile archivo, RedirectAttributes alerta) {
@@ -170,7 +170,7 @@ public class RegistroDelSpiController {
 	}
 	
 	//GUARDAR EDITAR
-    @Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@PostMapping("/saveedit")
 	public String guardaredit(@Valid @ModelAttribute("registrodelspi") RegistrodelSpi registrodelspi, BindingResult result, Model model, 
 			@RequestParam("file") MultipartFile archivo, RedirectAttributes alerta) {
@@ -218,7 +218,7 @@ public class RegistroDelSpiController {
 	}
 	
 	//EDITAR MODAL
-    @Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@GetMapping("/edit")
 	@ResponseBody
 	public RegistrodelSpi editar( Long idregistro) {
@@ -227,7 +227,7 @@ public class RegistroDelSpiController {
 	}
 	
 	//EDITAR Y DETALLE
-    @Secured({"ROLE_ADMIN", "ROLE_VISITOR"})
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND","ROLE_VISITOR"})
 	@GetMapping("/spidetl/{idregistro}")
 	public String Verdetalle(@PathVariable("idregistro") Long idregistro, Model model, RedirectAttributes attribute) { 
 		List<Institucion> listainstitucion=IInstitucionService.listainstitucion();
@@ -253,7 +253,7 @@ public class RegistroDelSpiController {
 	}
 	 
  
-	@Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@GetMapping("/editar/{idregistro}")
 	public String editar(@PathVariable("idregistro") Long idregistro, Model model) {
 		RegistrodelSpi registrodelspi = IRegistroDelSpiService.buscarPorId(idregistro);
@@ -269,7 +269,7 @@ public class RegistroDelSpiController {
 	} 
 	
 	//GUARDAR ACTIVO
-	@Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@PostMapping("/saveactivo")
 	public String guardaractivo(@Valid @ModelAttribute Activo activo, BindingResult result,
 			RedirectAttributes alerta) {
@@ -294,7 +294,7 @@ public class RegistroDelSpiController {
 	
 	
 	//GUARDAR INSTITUCION
-	@Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
 	@PostMapping("/saveinstitucion")
 	public String guardarinstitucion(@Valid @ModelAttribute Institucion institucion, BindingResult result,
 			RedirectAttributes alerta) {
