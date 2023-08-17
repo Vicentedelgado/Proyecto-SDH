@@ -84,7 +84,7 @@ public class AdminController {
 		Activo activo=new Activo();
 		Modalidad modalidad=new Modalidad();
 		//VENTANA
-		model.addAttribute("titulo","Página: Admin de SDH");
+		model.addAttribute("titulo","Página: Admin");
 		model.addAttribute("titulo1","Zonas");
 		model.addAttribute("listazonas",listazonas);
 		model.addAttribute("listainstituciones",listainstituciones);
@@ -124,7 +124,7 @@ public class AdminController {
 		//CREAR FORMULARIOS
 		Zona zona = new Zona();
 		//VENTANA
-		model.addAttribute("titulo","Página: Zonas de la SDH");
+		model.addAttribute("titulo","Página: Zonas de SPI");
 		model.addAttribute("titulo0","Muestra una lista de las zonas");
 		model.addAttribute("listazonas",listazonas);
 		model.addAttribute("zona",zona);
@@ -138,7 +138,7 @@ public class AdminController {
 		//CREAR FORMULARIOS
 		Institucion institucion = new Institucion();
 		//VENTANA
-		model.addAttribute("titulo","Página: Instituciones de la SDH");
+		model.addAttribute("titulo","Página: Instituciones");
 		model.addAttribute("titulo0","Muestra una lista de las instituciones de la SDH");
 		model.addAttribute("listainstituciones",listainstituciones);
 		model.addAttribute("institucion",institucion);
@@ -153,7 +153,7 @@ public class AdminController {
 		//CREAR FORMULARIOS
 		Activo activo=new Activo();
 		//VENTANA
-		model.addAttribute("titulo","Página: Bienes/Servicios de SDH");
+		model.addAttribute("titulo","Página: Bienes/Servicios");
 		model.addAttribute("titulo0","Muestra una lista de bienes y servicios");
 		model.addAttribute("listaactivos",listaactivos);
 		model.addAttribute("listatipos",listatipos);
@@ -186,7 +186,7 @@ public class AdminController {
 		//CREAR FORMULARIOS
 		Unidad unidad = new Unidad();
 		//VENTANA
-		model.addAttribute("titulo","Página: Unidades de la SDH");
+		model.addAttribute("titulo","Página: Unidades");
 		model.addAttribute("titulo0","Se muestra la información de las unidades de atención existentes en un SPI");
 		model.addAttribute("listaunidad",listaunidad);
 		model.addAttribute("unidad",unidad);
@@ -428,7 +428,12 @@ public class AdminController {
 	@GetMapping("/deleteuser/{iduser}")
 	public String deleteuser(@PathVariable("iduser") Long iduser, RedirectAttributes alerta) {
 		Users User = null;
+		Users UserAdmin=IUsersService.buscarPorId(iduser);
 		
+		if(UserAdmin.getIduser() == 1 || UserAdmin.getIduser() == 2 || UserAdmin.getIduser() == 3 ) {
+			alerta.addFlashAttribute("error", "El Usuario "+ UserAdmin.getUsername() + ", no se puede elinimar está protegido por el sistema");
+			return "redirect:/views/DataSpi/Admin/usuarios";
+		}
 		if(iduser > 0) {
 			User = IUsersService.buscarPorId(iduser);
 			if(User == null) {
