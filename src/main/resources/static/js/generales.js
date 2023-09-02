@@ -33,8 +33,10 @@ $(function() {
 //función select dinámico página registro del spi por tipo
 $('#filtrarportipo').change(
         function() {
-            $.getJSON("http://localhost:9898/views/DataSpi/RegistroDelSpi/Elegiractivo", {
-            /*$.getJSON("http://192.168.61.28:8080/views/DataSpi/RegistroDelSpi/Elegiractivo", {*/
+			var loc = window.location;
+        	var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
+        	var pageurl = loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
+			$.getJSON(pageurl+"Elegiractivo", {
                 idtipo : $(this).val(),
                 ajax : 'true'
             }, function(data) {
@@ -53,8 +55,10 @@ $('#filtrarportipo').change(
 //función select dinámico página rrhh 1 modal save
 $('#spiporzona').change(
         function() {
-            $.getJSON("http://localhost:9898/views/DataSpi/RegistroDelSpi/Elegirspi", {
-            /*$.getJSON("http://192.168.61.28:8080/views/DataSpi/RegistroDelSpi/Elegirspi", {*/
+			var loc = window.location;
+        	var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
+        	var pageurl = loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
+			$.getJSON(pageurl+"Elegirspi", {
                 idzona : $(this).val(),
                 ajax : 'true'
             }, function(data) {
@@ -76,8 +80,10 @@ $('#spiporzona').change(
 //función select dinámico página rrhh 2 modal edit
 $('#idzona1').change(
         function() {
-            $.getJSON("//localhost:9898/views/DataSpi/RRHH/Elegirspi", {
-            /*$.getJSON("//192.168.61.28:8080/views/DataSpi/RRHH/Elegirspi", {*/
+			var loc = window.location;
+        	var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
+        	var pageurl = loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
+			$.getJSON(pageurl+"Elegirspi", {
                 idzona : $(this).val(),
                 ajax : 'true'
             }, function(data) {
@@ -95,8 +101,10 @@ $('#idzona1').change(
 //función select dinámico página rrhh filtrar 
 $('#idzonafiltrar').change(
       function() {
-          $.getJSON("//localhost:9898/views/DataSpi/RRHH/Elegirspi", {
-          /*$.getJSON("//192.168.61.28:8080/views/DataSpi/RRHH/Elegirspi", {*/
+			var loc = window.location;
+        	var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
+        	var pageurl = loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
+			$.getJSON(pageurl+"Elegirspi", {
               idzona : $(this).val(),
               ajax : 'true'
           }, function(data) {

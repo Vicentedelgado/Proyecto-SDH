@@ -147,7 +147,7 @@ public class RRHHController {
 			model.addAttribute("zona",zona);
 			model.addAttribute("listaunidad",listaunidad);
 			model.addAttribute("listamodalidad",listamodalidad);
-			alerta.addFlashAttribute("info", "No existen fucionarios para este SPI");
+			alerta.addFlashAttribute("info", "No existen fucionarios para este SPI elija otro");
 			return"redirect:/views/DataSpi/RRHH/";
 		}
 		
@@ -230,6 +230,13 @@ public class RRHHController {
 	@Secured({"ROLE_ADMIN", "ROLE_ATTEND","ROLE_VISITOR"})
 	@RequestMapping(value="/Elegirspi",method = RequestMethod.GET)
 	public @ResponseBody List<SpiDatos> BuscarporZona(@RequestParam(value ="idzona", required = true) Zona idzona){
+		return ISpiDatosService.FindByZona(idzona); 
+	}
+	
+	//ELEGIR SPI POR ZONA (FILTRAR)
+	@Secured({"ROLE_ADMIN", "ROLE_ATTEND","ROLE_VISITOR"})
+	@RequestMapping(value="/listaporspi/Elegirspi",method = RequestMethod.GET)
+	public @ResponseBody List<SpiDatos> BuscarporZonaSpi(@RequestParam(value ="idzona", required = true) Zona idzona){
 		return ISpiDatosService.FindByZona(idzona); 
 	}
 	

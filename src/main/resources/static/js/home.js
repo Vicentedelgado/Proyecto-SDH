@@ -5,8 +5,10 @@
 //funcion select dinámico página home
 $('#spiporzona').change(
     function() {
-        $.getJSON("http://localhost:9898/Elegirspi", {
-        /*$.getJSON("http://192.168.61.28:8080/spidata_sdh/Elegirspi", {*/
+		var loc = window.location;
+        var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
+        var pageurl = loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
+        $.getJSON(pageurl+"Elegirspi", {
             idzona : $(this).val(),
             ajax : 'true'
         }, function(data) {
@@ -53,26 +55,6 @@ $(function(){
 	document.getElementById('footertext').innerHTML=maxDate;
 	
 });
-
-//Ordenar lista zona
-
-$(document).ready(()=>{
-	let select = $('#spiporzona').children('option').get();
-	
-	select.sort(function(a,b){
-		let select1= $(a).text().toUpperCase();
-		let select2= $(a).text().toUpperCase();
-		
-		return select1 < select2 ? -1 : (select1 > select2) ? 1 : 0;
-		
-	});
-	
-	$.each(select, function(indice,elemento){
-		$('#spiporzona').append(elemento);
-	});
-	
-});
-
 
 //Validaciones de Bootstrap 
 (function() {

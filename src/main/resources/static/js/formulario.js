@@ -35,7 +35,11 @@ $(function() {
 //función select dinámico página formulario
 $('#spiporzonaformulario').change(
         function() {
-            $.getJSON("http://localhost:9898/views/DataSpi/Formulario/Elegirspi", {
+			var loc = window.location;
+            var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
+            var pageurl = loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
+			$.getJSON(pageurl+"Elegirspi", {
+           /*$.getJSON("http://localhost:9898/views/DataSpi/Formulario/Elegirspi", {*/
            /* $.getJSON("http://192.168.61.28:8080/views/DataSpi/Formulario/Elegirspi", {*/
                 idzona : $(this).val(),
                 ajax : 'true'
@@ -63,7 +67,11 @@ $(document).ready(function(){
 //función select dinámico página formulario por tipo
 $('#filtrarportipo').change(
         function() {
-            $.getJSON("http://localhost:9898/views/DataSpi/RegistroDelSpi/Elegiractivo", {
+			var loc = window.location;
+            var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
+            var pageurl = loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
+			$.getJSON(pageurl+"Elegiractivo", {
+            /*$.getJSON("http://localhost:9898/views/DataSpi/RegistroDelSpi/Elegiractivo", {*/
             /*$.getJSON("http://192.168.61.28:8080/views/DataSpi/RegistroDelSpi/Elegiractivo", {*/
                 idtipo : $(this).val(),
                 ajax : 'true'

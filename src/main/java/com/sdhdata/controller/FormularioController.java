@@ -203,10 +203,17 @@ public class FormularioController {
 	public @ResponseBody List<SpiDatos> BuscarporZona(@RequestParam(value ="idzona", required = true) Zona idzona){
 		return ISpiDatosService.FindByZona(idzona); 
 	}
+  	
+    //ELEGIR SPI POR ZONA (FILTRAR)
+  	@Secured({"ROLE_ADMIN", "ROLE_ATTEND","ROLE_VISITOR"})
+	@RequestMapping(value="/listaporspi/Elegirspi",method = RequestMethod.GET)
+	public @ResponseBody List<SpiDatos> BuscarporZonaSpi(@RequestParam(value ="idzona", required = true) Zona idzona){
+		return ISpiDatosService.FindByZona(idzona); 
+	}
 	
 	//ELEGIR ACTIVO POR TIPO (FILTRAR)
   	@Secured({"ROLE_ADMIN", "ROLE_ATTEND"})
-	@RequestMapping(value="/Elegiractivo",method = RequestMethod.GET)
+	@RequestMapping(value="/listaporspi/Elegiractivo",method = RequestMethod.GET)
 	public @ResponseBody List<Activo> BuscarporTipo(@RequestParam(value ="idtipo", required = true) Tipo idtipo){
 		return IActivoService.Buscarportipo(idtipo); 
 	}
